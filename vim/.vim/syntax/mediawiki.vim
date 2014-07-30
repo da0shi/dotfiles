@@ -1,0 +1,1 @@
+/Users/da0shi/.local/src/mediawiki.vim/syntax/mediawiki.vim

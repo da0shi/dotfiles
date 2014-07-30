@@ -1,0 +1,40 @@
+pathmerge () {
+	case "$1" in
+		MANPATH)
+			case ":${MANPATH}:" in
+				*:"$2":*)
+					;;
+				*)
+					if [ "$3" = "after" ]; then
+						MANPATH=${MANPATH}:$1
+					else
+						MANPATH=$1:${MANPATH}
+					fi
+			esac
+			;;
+		LIBPATH)
+			case ":${LD_LIBRARY_PATH}:" in
+				*:"$1":*)
+					;;
+				*)
+					if [ "$2" = "after" ]; then
+						LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:$1
+					else
+						LD_LIBRARY_PATH=$1:${LD_LIBRARY_PATH}
+					fi
+			esac
+			;;
+		*)
+			case ":${PATH}:" in
+				*:"$1":*)
+					;;
+				*)
+					if [ "$2" = "after" ]; then
+						PATH=${PATH}:$1
+					else
+						PATH=$1:${PATH}
+					fi
+			esac
+			;;
+	esac
+}

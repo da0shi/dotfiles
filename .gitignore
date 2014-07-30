@@ -1,0 +1,18 @@
+# bakup
+*~
+.*~
+*.swp
+.*.swp
+
+# extension
+*.elc
+*.dat
+
+# file
+.bash_history
+.viminfo
+/vim/.vim/.netrwhist
+/vim/.vim/.VimballRecord
+
+# directory
+/emacs/.emacs.d/auto-save-list

@@ -1,0 +1,87 @@
+# bash
+# color option
+if [ -x /usr/bin/dircolors ]; then
+	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+	alias ls="ls --color=auto -F"
+	alias dir="dir --color=auto"
+	alias vdir="vdir --color=auto"
+
+	alias grep="grep --color=auto"
+	alias fgrep="fgrep --color=auto"
+	alias egrep="egrep --color=auto"
+fi
+
+# default command
+alias ls="ls -F"
+alias la="ls -a"
+alias ll="ls -lh"
+alias lla="ls -alh"
+alias rm="rm -i"
+alias mv="mv -i"
+alias cp="cp -i"
+alias less="less -gMj2"
+#alias titanium="/Library/Application\ Support/Titanium/mobilesdk/osx/3.0.0.GA/titanium.py"
+
+#shellscript
+
+# cd
+alias dow="cd ${HOME}/Downloads/"
+alias doc="cd ${HOME}/Documents/"
+alias desk="cd ${HOME}/Desktop/"
+alias tmp="cd ${HOME}/tmp"
+
+# for typo
+alias l="ls"
+alias s="ls"
+alias sl="ls"
+alias tsk="task"
+alias taks="task"
+
+
+## database
+alias cpla-dashboard="mysql dashboard -u dashboard -p23W1xldgPlaQIuC6CmId"
+alias cpla-logtest="mysql log_test -u log_test -p7zmuTCcmwmg3uR7t6YXR"
+alias cpla-dashboard="mysql dashboard -u dashboard -p23W1xldgPlaQIuC6CmId"
+
+# minecraft
+alias minescreen="screen -r minecraft-client"
+
+if [ "$(uname)" == "Darwin" ]; then
+	alias app="cd /Applications/"
+	alias ls="ls -GF"
+	# open app
+	# editor
+	alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
+	alias cot="/Applications/CotEditor.app/Contents/MacOS/CotEditor"
+	alias eclipse="open -a Eclipse.app"
+	# viewer
+	alias preview="open -a Preview.app"
+	# browser
+	alias firefox="open -a Firefox.app"
+	alias chrome="open -a 'Google Chrome.app'"
+	alias opera="open -a Opera.app"
+	alias safari="open -a Safari.app"
+	# mailer
+	alias mailer="open -a Mail.app"
+	alias thunder="open -a Thunderbird.app"
+	# chat
+	alias skype="open -a Skype.app"
+	alias ichat="open -a iChat.app"
+	# microsoft
+	alias Word="open -a 'Microsoft Word.app'"
+	alias Excel="open -a 'Microsoft Excel.app'"
+	alias PowerPoint="open -a 'Microsoft PowerPoint.app'"
+fi
+if [ "$(uname)" == "Linux" ]; then
+	# Add an "alert" alias for long running commands.  Use like so:
+	#   sleep 10; alert
+	alias alert="notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e "\""s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//"\"")""
+	# custom command
+	alias aptcheck="sudo apt-get update && sudo apt-get upgrade"
+	alias aptclean="sudo apt-get autoremove && sudo apt-get autoclean"
+	alias aptsearch="apt-cache search"
+
+	alias skype-da0shi="skype --dbpath=.Skype"
+	alias skype-shida0="skype --dbpath=.skype.shida0"
+	alias skype-livedevelop="skype --dbpath=.skype.live.develop"
+fi

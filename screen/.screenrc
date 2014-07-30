@@ -1,0 +1,24 @@
+# Encode
+defutf8 on
+defencoding utf8
+encoding utf-8 utf-8
+
+# Keys
+escape ^T^T
+# zombie ^[
+
+# The scroll buffer
+defscrollback 3000
+markkeys h=^B:l=^F:$=^E:^U=^Z:^D=^V
+
+startup_message off
+autodetach on
+vbell off
+
+caption always "%-w%10L>%{=b bw}%n %t%{-}%+w%-0="
+hardstatus alwayslastline "%H%=%Y/%m/%d %02c"
+
+shell $SHELL
+shelltitle "$ |sh"
+
+chdir ${HOME}

@@ -1,0 +1,27 @@
+[user]
+	name = da0shi
+	email = dev@da0shi.com
+[core]
+	editor = vim
+	pager = less -r
+	autocrlf = false
+	quotepath = false
+	filemode = false
+[color]
+	ui = auto
+[alias]
+	co = checkout
+	st = status
+	br = branch
+	mg = merge
+	logg = log --graph --decorate
+	lg = log --graph --decorate --oneline
+	llg = log --graph --decorate --oneline --stat
+[help]
+	autocorrect = 1
+[push]
+	default = simple
+[merge]
+	conflictstyle = diff3
+[github]
+	user = da0shi
