@@ -10,9 +10,9 @@ HISTFILESIZE=2000
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
-
+[ -n "${OS}" ] && OS=$(uname)
 case ${OS} in
-	Darwin )
+	Darwin)
 		export LSCOLORS=GxDxcxdxCxegedabagacbg;
 		export SSH_AUTH_SOCK=""
 		GIT_CONTRIB_DIR=${HOME}/.local/git-contrib
@@ -20,7 +20,7 @@ case ${OS} in
 		;;
 	* )
 		GIT_CONTRIB_DIR=/usr/local/etc/git-contrib
-		BCOMPLETION_DIR= "/etc"
+		BCOMPLETION_DIR="/etc"
 		;;
 esac
 
