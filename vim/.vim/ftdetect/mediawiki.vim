@@ -1,1 +1,0 @@
-/Users/da0shi/.local/src/mediawiki.vim/ftdetect/mediawiki.vim

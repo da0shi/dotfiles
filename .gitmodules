@@ -1,3 +1,6 @@
 [submodule "vim/.vim/html5.vim"]
 	path = vim/.vim/html5.vim
 	url = https://github.com/othree/html5.vim.git
+[submodule "vim/.vim/mediawiki.vim"]
+	path = vim/.vim/mediawiki.vim
+	url = https://github.com/chikamichi/mediawiki.vim.git
