@@ -1,6 +1,6 @@
 pathmerge () {
 	case "$1" in
-		MANPATH)
+		MAN)
 			case ":${MANPATH}:" in
 				*:"$2":*)
 					;;
@@ -12,7 +12,7 @@ pathmerge () {
 					fi
 			esac
 			;;
-		LIBPATH)
+		LIB)
 			case ":${LD_LIBRARY_PATH}:" in
 				*:"$1":*)
 					;;

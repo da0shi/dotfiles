@@ -17,10 +17,11 @@ case ${OS} in
 		ANDROID_NDK=/opt/local/android-ndk-macosx
 		;;
 	* )
+		# "java"
+		JAVA_HOME=/opt/local/java/${JDK_VERSION}
 		# "android"
 		ANDROID_SDK=/opt/local/android-sdk
 		ANDROID_NDK=/opt/local/android-ndk
-		JAVA_HOME=/opt/local/java/${JDK_VERSION}
 		;;
 esac
 
@@ -36,18 +37,21 @@ pathmerge /opt/local/bin
 pathmerge ${HOME}/local/bin
 pathmerge ${HOME}/.local/bin
 
+# "mysql"
+[ -d /usr/local/mysql ] && pathmunge /usr/local/mysql/bin
 # "TeX"
 case ${OS} in
 	Darwin )
-		pathmerge ${TEXLIVE_ROOT}/2012/bin/x86_64-darwin
+		TEX_BIN=x86_64-darwin
 		;;
 	* )
-		pathmerge ${TEXLIVE_ROOT}/2012/bin/x86_64-linux
+		TEX_BIN=x86_64-linux
 		;;
 esac
-pathmerge MANPATH ${TEXLIVE_ROOT}/2012/texmf/doc/man
+pathmerge ${TEXLIVE_ROOT}/2012/bin/${TEX_BIN}
+pathmerge MAN${TEXLIVE_ROOT}/2012/texmf/doc/man
 
-pathmerge LIBPATH /usr/local/lib
+pathmerge LIB/usr/local/lib
 
 # export variables
 export PATH
@@ -56,7 +60,7 @@ export LD_LIBRARY_PATH
 
 export JAVA_HOME
 
-export TERM=xterm-256color
+[ "${TERM}" != "linux" ] && export TERM=xterm-256color
 
 # Get the aliases and functions
 [ -r ${HOME}/.bashrc ] && . ${HOME}/.bashrc

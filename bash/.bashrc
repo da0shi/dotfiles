@@ -3,7 +3,7 @@
 [ -z "$PS1" ] && return
 
 # history
-HISTCONTROL=ignoreboth;
+HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
 
@@ -51,6 +51,7 @@ case ${TERM} in
 		;;
 esac
 
+# Alias definitions.
 [ -r ${HOME}/.bash_alias ] && . ${HOME}/.bash_alias
 
 [ $(type -t direnv) ] && eval "$(direnv hook $0)"
@@ -59,3 +60,6 @@ esac
 export EDITOR=vim
 #pager
 export PAGER='less -gMj10'
+
+[ -d /usr/local/heroku ] && HEROKU_ROOT=/usr/local/heroku
+[ -n ${HEROKU_ROOT} ] && export PATH="/usr/local/heroku/bin:$PATH"

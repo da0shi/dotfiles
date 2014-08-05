@@ -2,13 +2,13 @@
 # color option
 if [ -x /usr/bin/dircolors ]; then
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-	alias ls="ls --color=auto -F"
-	alias dir="dir --color=auto"
-	alias vdir="vdir --color=auto"
+	alias ls='ls --color=auto -F'
+	alias dir='dir --color=auto'
+	alias vdir='vdir --color=auto'
 
-	alias grep="grep --color=auto"
-	alias fgrep="fgrep --color=auto"
-	alias egrep="egrep --color=auto"
+	alias grep='grep --color=auto'
+	alias fgrep='fgrep --color=auto'
+	alias egrep='egrep --color=auto'
 fi
 
 # default command
@@ -19,23 +19,23 @@ alias lla="ls -alh"
 alias rm="rm -i"
 alias mv="mv -i"
 alias cp="cp -i"
-alias less="less -gMj2"
+alias less='less -gMj2';
 #alias titanium="/Library/Application\ Support/Titanium/mobilesdk/osx/3.0.0.GA/titanium.py"
 
 #shellscript
 
 # cd
-alias dow="cd ${HOME}/Downloads/"
-alias doc="cd ${HOME}/Documents/"
-alias desk="cd ${HOME}/Desktop/"
-alias tmp="cd ${HOME}/tmp"
+alias dow='cd ${HOME}/Downloads/'
+alias doc='cd ${HOME}/Documents/'
+alias desk='cd ${HOME}/Desktop/'
+alias tmp='cd ${HOME}/tmp'
 
 # for typo
-alias l="ls"
-alias s="ls"
-alias sl="ls"
-alias tsk="task"
-alias taks="task"
+alias l='ls'
+alias s='ls'
+alias sl='ls'
+alias tsk='task'
+alias taks='task'
 
 
 ## database
@@ -44,7 +44,7 @@ alias cpla-logtest="mysql log_test -u log_test -p7zmuTCcmwmg3uR7t6YXR"
 alias cpla-dashboard="mysql dashboard -u dashboard -p23W1xldgPlaQIuC6CmId"
 
 # minecraft
-alias minescreen="screen -r minecraft-client"
+alias minescreen='screen -r minecraft-client'
 
 if [ "$(uname)" == "Darwin" ]; then
 	alias app="cd /Applications/"
