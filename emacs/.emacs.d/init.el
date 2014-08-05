@@ -15,7 +15,7 @@
 	ns-p      (eq window-system 'ns)
 	carbon-p  (eq window-system 'mac)
 	linux-p   (eq system-type 'gnu/linux)
-	colinux-p (when linux-p
+;	colinux-p (when linux-p
 ;				(let ((file "/proc/modules"))
 ;					(and
 ;					(file-readable-p file)
