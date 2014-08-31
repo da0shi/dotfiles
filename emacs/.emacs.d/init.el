@@ -30,11 +30,9 @@
 	windows-p (or cygwin-p nt-p meadow-p)
 	)
 
-;----- Character Set -----
-
-; ----- set default language -----
+;#  Encodings
+; set default language
 (set-language-environment "Japanese")
-; ----- use utf-8 if it's possible -----
 ; always use utf-8 if it's possible
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8-unix)
@@ -44,6 +42,18 @@
 (set-buffer-file-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
+
+;# Font
+(set-face-attribute 'default nil
+					:family "monaco"
+					:height 140)
+;(create-fontset-from-ascii-font "Ricty-14:weight=normal:slant=normal" nil "ricty")
+;(set-fontset-font "fontset-ricty"
+;				  'unicode
+;				  (font-spec :family "Ricty" :size 14)
+;				  nil
+;				  'append)
+;(add-to-list 'default-frame-alist '(font . "fontset-ricty"))
 
 ; ----- Key Bind -----
 
