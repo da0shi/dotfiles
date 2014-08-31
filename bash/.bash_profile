@@ -12,6 +12,11 @@ case ${OS} in
 	Darwin )
 		# "java"
 		JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
+		_JAVA_OPTIONS="-Dfile.encoding=UTF-8"
+
+		# Groovy
+		GRAILS_HOME=$(brew --prefix)/Cellar/groovy/2.3.3
+
 		# "android"
 		ANDROID_SDK=/opt/local/android-sdk-macosx
 		ANDROID_NDK=/opt/local/android-ndk-macosx
@@ -53,6 +58,8 @@ pathmerge LIBPATH /usr/local/lib
 export PATH
 export MANPATH
 export LD_LIBRARY_PATH
+
+[ -n ${_JAVA_OPTIONS} ] && export _JAVA_OPTIONS
 
 export JAVA_HOME
 
