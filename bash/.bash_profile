@@ -10,18 +10,20 @@ TITANIUM_VERTION=2.1.4GA
 
 case ${OS} in
 	Darwin )
-		# "java"
+		# java
 		JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
-		# "android"
+		# android
 		ANDROID_SDK=/opt/local/android-sdk-macosx
 		ANDROID_NDK=/opt/local/android-ndk-macosx
 		;;
 	* )
-		# "java"
+		# java
 		JAVA_HOME=/opt/local/java/${JDK_VERSION}
-		# "android"
-		ANDROID_SDK=/opt/local/android-sdk
-		ANDROID_NDK=/opt/local/android-ndk
+		# scala
+		SCALA_HOME=/opt/local/scala-2.11.2
+		# android
+		ANDROID_SDK=/usr/local/android-sdk
+		ANDROID_NDK=/usr/local/android-ndk
 		;;
 esac
 
@@ -31,6 +33,7 @@ TEXLIVE_ROOT=/usr/local/texlive
 
 # path
 pathmerge ${JAVA_HOME}/bin
+pathmerge ${SCALA_HOME}/bin
 pathmerge ${ANDROID_SDK}/tools
 pathmerge ${ANDROID_SDK}/platform-tools
 pathmerge /opt/local/bin
@@ -38,7 +41,7 @@ pathmerge ${HOME}/local/bin
 pathmerge ${HOME}/.local/bin
 
 # "mysql"
-[ -d /usr/local/mysql ] && pathmunge /usr/local/mysql/bin
+[ -d /usr/local/mysql ] && pathmerge /usr/local/mysql/bin
 # "TeX"
 case ${OS} in
 	Darwin )
