@@ -10,11 +10,20 @@ TITANIUM_VERTION=2.1.4GA
 
 case ${OS} in
 	Darwin )
-		# java
+		# "java"
+		BREW_PREFIX=$(brew --prefix)
 		JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
-		# android
+		_JAVA_OPTIONS="-Dfile.encoding=UTF-8"
+
+		# Groovy
+		GRAILS_HOME=${BREW_PREFIX}/Cellar/groovy/2.3.3
+
+		# Android
 		ANDROID_SDK=/opt/local/android-sdk-macosx
 		ANDROID_NDK=/opt/local/android-ndk-macosx
+
+		# Scala
+		SCALA_HOME=${BREW_PREFIX}/Cellar/scala/2.11.1
 		;;
 	* )
 		# java
@@ -32,13 +41,20 @@ esac
 TEXLIVE_ROOT=/usr/local/texlive
 
 # path
-pathmerge ${JAVA_HOME}/bin
-pathmerge ${SCALA_HOME}/bin
 pathmerge ${ANDROID_SDK}/tools
 pathmerge ${ANDROID_SDK}/platform-tools
+
 pathmerge /opt/local/bin
 pathmerge ${HOME}/local/bin
 pathmerge ${HOME}/.local/bin
+
+[ -n ${JAVA_HOME} ] && pathmerge ${JAVA_HOME}/bin
+[ -n ${SCALA_HOME} ] && pathmerge ${SCALA_HOME}/bin
+
+if [ -n ${ANDROID_SDK} ]; then
+	pathmerge ${ANDROID_SDK}/tools
+	pathmerge ${ANDROID_SDK}/platform-tools
+fi
 
 # "mysql"
 [ -d /usr/local/mysql ] && pathmerge /usr/local/mysql/bin
@@ -52,14 +68,16 @@ case ${OS} in
 		;;
 esac
 pathmerge ${TEXLIVE_ROOT}/2012/bin/${TEX_BIN}
-pathmerge MAN${TEXLIVE_ROOT}/2012/texmf/doc/man
+pathmerge MAN ${TEXLIVE_ROOT}/2012/texmf/doc/man
 
-pathmerge LIB/usr/local/lib
+pathmerge LIB /usr/local/lib
 
 # export variables
 export PATH
 export MANPATH
 export LD_LIBRARY_PATH
+
+[ -n ${_JAVA_OPTIONS} ] && export _JAVA_OPTIONS
 
 export JAVA_HOME
 

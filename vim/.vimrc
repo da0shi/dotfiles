@@ -108,8 +108,10 @@ endfunction
 
 "-----------------------------------------------------------------------------
 "Syntax and Extension
+autocmd BufNewFile,BufRead *.* set noexpandtab tabstop=4 shiftwidth=4
+
 autocmd BufNewFile,BufRead *.ctp set filetype=php
-autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd BufNewFile,BufRead *.md set filetype=markdown expandtab tabstop=2 shiftwidth=2
 
 "autocmd BufNewFile,BufRead *.php set expandtab tabstop=2 shiftwidth=2
 autocmd BufNewFile,BufRead *.html set expandtab tabstop=2 shiftwidth=2
