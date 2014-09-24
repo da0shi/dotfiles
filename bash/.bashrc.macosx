@@ -1,0 +1,17 @@
+export LSCOLORS=GxDxcxdxCxegedabagacbg;
+export SSH_AUTH_SOCK=""
+GIT_CONTRIB_DIR=${HOME}/.local/git-contrib
+BCOMPLETION_DIR="$(brew --prefix)/etc"
+
+gitps1=":"
+if [ -r ${GIT_CONTRIB_DIR}/completion/git-prompt.sh ]; then
+	. ${GIT_CONTRIB_DIR}/completion/git-prompt.sh
+fi
+if [ -r ${GIT_CONTRIB_DIR}/completion/git-completion.bash ]; then
+	. ${GIT_CONTRIB_DIR}/completion/git-completion.bash
+fi
+[ $(type -t __git_ps1) ] && gitps1="__git_ps1"
+
+if [ -f ${BCOMPLETION_DIR}/bash_completion ] && ! shopt -oq posix; then
+	. ${BCOMPLETION_DIR}/bash_completion
+fi
