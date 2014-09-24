@@ -3,6 +3,7 @@
 .*~
 *.swp
 .*.swp
+*.orig
 
 # extension
 *.elc
