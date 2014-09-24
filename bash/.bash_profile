@@ -10,8 +10,8 @@ TITANIUM_VERTION=2.1.4GA
 
 case ${OS} in
 	Darwin )
-		BREW_PREFIX=$(brew --prefix)
 		# "java"
+		BREW_PREFIX=$(brew --prefix)
 		JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
 		_JAVA_OPTIONS="-Dfile.encoding=UTF-8"
 
@@ -26,11 +26,13 @@ case ${OS} in
 		SCALA_HOME=${BREW_PREFIX}/Cellar/scala/2.11.1
 		;;
 	* )
-		# "java"
+		# java
 		JAVA_HOME=/opt/local/java/${JDK_VERSION}
-		# "android"
-		ANDROID_SDK=/opt/local/android-sdk
-		ANDROID_NDK=/opt/local/android-ndk
+		# scala
+		SCALA_HOME=/opt/local/scala-2.11.2
+		# android
+		ANDROID_SDK=/usr/local/android-sdk
+		ANDROID_NDK=/usr/local/android-ndk
 		;;
 esac
 
@@ -39,6 +41,9 @@ esac
 TEXLIVE_ROOT=/usr/local/texlive
 
 # path
+pathmerge ${ANDROID_SDK}/tools
+pathmerge ${ANDROID_SDK}/platform-tools
+
 pathmerge /opt/local/bin
 pathmerge ${HOME}/local/bin
 pathmerge ${HOME}/.local/bin
@@ -65,7 +70,7 @@ esac
 pathmerge ${TEXLIVE_ROOT}/2012/bin/${TEX_BIN}
 pathmerge MAN ${TEXLIVE_ROOT}/2012/texmf/doc/man
 
-pathmerge LIB/usr/local/lib
+pathmerge LIB /usr/local/lib
 
 # export variables
 export PATH
