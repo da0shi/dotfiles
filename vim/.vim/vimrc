@@ -123,9 +123,30 @@ if exists('g:acp_enableAtStartup')
 	endfunction
 endif
 
-"autocmd BufNewFile,BufRead *.php set expandtab tabstop=2 shiftwidth=2
-autocmd BufNewFile,BufRead *.html set expandtab tabstop=2 shiftwidth=2
-autocmd BufNewFile,BufRead *.css set expandtab tabstop=2 shiftwidth=2
-autocmd BufNewFile,BufRead *.js set expandtab tabstop=2 shiftwidth=2
+let g:format_allow_over_tw = 1
+if has("syntax")
+	syntax on
+endif
 
-"-----------------------------------------------------------------------------
+filetype plugin indent on
+"File Type and Coding Style {{{
+augroup vimrc_filetype
+	" Clean autocmds before setting
+	autocmd!
+
+	" File Type from Extension
+	autocmd BufNewFile,BufRead *.ctp setlocal filetype=php
+	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+	" Coding Style from File Type
+	autocmd FileType vim setlocal foldmethod=marker
+	autocmd FileType markdown setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType json setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType ruby setlocal tabstop=4 shiftwidth=4 expandtab
+	autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
+	autocmd FileType php setlocal tabstop=4 shiftwidth=4
+	autocmd FileType html setlocal tabstop=2 shiftwidth=2 indentexpr&
+	autocmd FileType css setlocal tabstop=2 shiftwidth=2
+	autocmd FileType gitcommit setlocal spell spelllang=en_us
+augroup END
+" }}}
