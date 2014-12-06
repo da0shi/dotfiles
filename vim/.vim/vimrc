@@ -1,26 +1,16 @@
 " vim: set ts=4 sw=4 sts=0:
-"-----------------------------------------------------------------------------
-" 文字コード関連
-"
-if &encoding !=# 'utf-8'
-	set encoding=japan
-	set fileencoding=japan
-endif
-set fileencodings=utf-8,eucjp-ms,iso-2022-jp,cp932,latin1
-if has('autocmd')
-	function! AU_ReCheck_FENC()
-		if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
-			let &fileencoding=&encoding
-		endif
-	endfunction
-	autocmd BufReadPost * call AU_ReCheck_FENC()
-endif
-" 改行コードの自動認識
+
+" Encoding {{{
+set encoding=utf-8
+scriptencoding utf-8
+set fileencodings=utf-8,cp932,eucjp-ms,iso-2022-jp,latin1
 set fileformats=unix,dos,mac
-" □とか○の文字があってもカーソル位置がずれないようにする
+
+" Deal with some double width characters
 if exists('&ambiwidth')
 	set ambiwidth=double
 endif
+" }}}
 
 "-----------------------------------------------------------------------------
 " 編集関連
