@@ -38,6 +38,32 @@ let s:env = VimrcEnvironment()
 let s:supports = VimrcSupports()
 " }}}
 
+" Mapping {{{
+" Turn off the IME when escaping from Insert mode @Insert
+set timeout timeoutlen=1000 ttimeoutlen=75
+inoremap <silent> <ESC> <ESC>:<C-u>set iminsert=0<CR>
+" Avoid execute <C-@> @Insert
+inoremap <C-@> <Nop>
+" Yank to end of the line, like 'D' / 'C' @Normal
+nnoremap Y y$
+" easier to set nohlsearch
+nnoremap <Esc><Esc> :noh<CR>
+
+" Emacs-like keybind @Command-line @Insert
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-h> <Backspace>
+cnoremap <C-d> <Del>
+inoremap <C-h> <Backspace>
+inoremap <C-d> <Del>
+
+" Refer to history @Command-line
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+" }}}
+
 set modeline
 
 "-----------------------------------------------------------------------------
