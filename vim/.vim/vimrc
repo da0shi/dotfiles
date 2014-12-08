@@ -123,6 +123,7 @@ augroup vimrc_filetype
 	" File Type from Extension
 	autocmd BufNewFile,BufRead *.ctp setlocal filetype=php
 	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+	autocmd BufNewFile,BufRead .bash* setlocal filetype=sh
 	" Coding Style from File Type
 	autocmd FileType vim setlocal foldmethod=marker
 	autocmd FileType markdown setlocal tabstop=2 shiftwidth=2 expandtab
