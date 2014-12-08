@@ -9,34 +9,38 @@ case ${OS} in
 	* )
 		# java
 		JDK_VERSION=jdk1.7.0_51
-		JAVA_HOME=/opt/local/java/${JDK_VERSION}
+		JAVA_HOME=/usr/local/java/${JDK_VERSION}
+		[ -d ${JAVA_HOME} ] || JAVA_HOME=
 		# scala
-		SCALA_HOME=/opt/local/scala-2.11.2
+		SCALA_HOME=/usr/local/scala-2.11.2
+		[ -d ${SCALA_HOME} ] || SCALA_HOME=
 		# android
 		ANDROID_SDK=/usr/local/android-sdk
+		[ -d ${ANDROID_SDK} ] || ANDROID_SDK=
 		ANDROID_NDK=/usr/local/android-ndk
-		GOPATH=${HOME}/.local/gopath
-		pathmerge ${ANDROID_SDK}/tools
-		pathmerge ${ANDROID_SDK}/platform-tools
+		[ -d ${ANDROID_NDK} ] || ANDROID_NDK=
+		# golang
+		GOPATH=${HOME}/.gopath
+		[ -d ${GOPATH} ] || GOPATH=
 
-		pathmerge /opt/local/bin
-		pathmerge ${HOME}/local/bin
-		pathmerge ${HOME}/.local/bin
-		pathmerge ${GOPATH}/bin
-		[ -n ${JAVA_HOME} ] && pathmerge ${JAVA_HOME}/bin
-		[ -n ${SCALA_HOME} ] && pathmerge ${SCALA_HOME}/bin
-		if [ -n ${ANDROID_SDK} ]; then
+		# optional bin directory made by user
+		[ -d /opt/local/bin ] && pathmerge /opt/local/bin
+		[ -d ${HOME}/local/bin ] && pathmerge ${HOME}/local/bin
+		[ -d ${HOME}/.local/bin ] && pathmerge ${HOME}/.local/bin
+
+		[ -n "${JAVA_HOME}" ] && export JAVA_HOME && pathmerge ${JAVA_HOME}/bin
+		[ -n "${SCALA_HOME}" ] && export SCALA_HOME && pathmerge ${SCALA_HOME}/bin
+		[ -n "${GOPATH}" ] && export GOPATH && pathmerge ${GOPATH}/bin
+		if [ -n "${ANDROID_SDK}" ]; then
 			pathmerge ${ANDROID_SDK}/tools
 			pathmerge ${ANDROID_SDK}/platform-tools
 		fi
 		[ -d /usr/local/mysql ] && pathmerge /usr/local/mysql/bin
 		xpathmerge LIB /usr/local/lib
+
 		export PATH
 		export MANPATH
 		export LD_LIBRARY_PATH
-		export JAVA_HOME
-		export SCALA_HOME
-		export GOPATH
 		;;
 esac
 
