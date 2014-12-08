@@ -1,6 +1,6 @@
 #.bash_profile
 export _BASH_PROFILE_=":"
-. ${HOME}/.bash_utils
+. ${HOME}/.bashutils
 
 OS=$(uname)
 
