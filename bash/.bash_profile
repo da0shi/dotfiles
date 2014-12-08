@@ -16,27 +16,27 @@ case ${OS} in
 		ANDROID_SDK=/usr/local/android-sdk
 		ANDROID_NDK=/usr/local/android-ndk
 		GOPATH=${HOME}/.local/gopath
-pathmerge ${ANDROID_SDK}/tools
-pathmerge ${ANDROID_SDK}/platform-tools
+		pathmerge ${ANDROID_SDK}/tools
+		pathmerge ${ANDROID_SDK}/platform-tools
 
-pathmerge /opt/local/bin
-pathmerge ${HOME}/local/bin
-pathmerge ${HOME}/.local/bin
-pathmerge ${GOPATH}/bin
-[ -n ${JAVA_HOME} ] && pathmerge ${JAVA_HOME}/bin
-[ -n ${SCALA_HOME} ] && pathmerge ${SCALA_HOME}/bin
-if [ -n ${ANDROID_SDK} ]; then
-	pathmerge ${ANDROID_SDK}/tools
-	pathmerge ${ANDROID_SDK}/platform-tools
-fi
-[ -d /usr/local/mysql ] && pathmerge /usr/local/mysql/bin
-pathmerge LIB /usr/local/lib
-export PATH
-export MANPATH
-export LD_LIBRARY_PATH
-export JAVA_HOME
-export SCALA_HOME
-export GOPATH
+		pathmerge /opt/local/bin
+		pathmerge ${HOME}/local/bin
+		pathmerge ${HOME}/.local/bin
+		pathmerge ${GOPATH}/bin
+		[ -n ${JAVA_HOME} ] && pathmerge ${JAVA_HOME}/bin
+		[ -n ${SCALA_HOME} ] && pathmerge ${SCALA_HOME}/bin
+		if [ -n ${ANDROID_SDK} ]; then
+			pathmerge ${ANDROID_SDK}/tools
+			pathmerge ${ANDROID_SDK}/platform-tools
+		fi
+		[ -d /usr/local/mysql ] && pathmerge /usr/local/mysql/bin
+		pathmerge LIB /usr/local/lib
+		export PATH
+		export MANPATH
+		export LD_LIBRARY_PATH
+		export JAVA_HOME
+		export SCALA_HOME
+		export GOPATH
 		;;
 esac
 
