@@ -1,3 +1,14 @@
+ostype () {
+case ${OSTYPE} in
+	linux* ) echo "linux" ;;
+	darwin* ) echo "darwin" ;;
+	freebsd* ) echo "freebsd" ;;
+	cygwin ) echo "cygwin" ;;
+	msys ) echo "msys" ;;
+	win32 ) echo "win32" ;;
+	* ) echo "linux" ;;
+esac
+}
 emsg () {
 	>&2 echo $*
 }
