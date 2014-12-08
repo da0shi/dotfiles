@@ -2,12 +2,7 @@
 _BASH_PROFILE_=":"
 . ${HOME}/.bashutils
 
-case `ostype` in
-	darwin )
-		. ~/.bash_profile.macosx ;;
-	* )
-		. ~/.bash_profile.ubuntu ;;
-esac
+. ~/.bashenv
 
 # optional bin directory made by user
 [ -d /opt/local/bin ] && pathmerge /opt/local/bin
