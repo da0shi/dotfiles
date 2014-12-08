@@ -1,5 +1,5 @@
 #.bash_profile
-export _BASH_PROFILE_=":"
+_BASH_PROFILE_=":"
 . ${HOME}/.bashutils
 
 case `ostype` in
@@ -13,11 +13,6 @@ esac
 [ -d /opt/local/bin ] && pathmerge /opt/local/bin
 [ -d ${HOME}/local/bin ] && pathmerge ${HOME}/local/bin
 [ -d ${HOME}/.local/bin ] && pathmerge ${HOME}/.local/bin
-
-# custom variables
-[ -n "${_GIT_CONTRIB_DIR}" ] && export _GIT_CONTRIB_DIR
-# Bash
-[ -n "${_BCOMPLETION_DIR}" ] && export _BCOMPLETION_DIR
 
 # Programming Language
 [ -n "${JAVA_HOME}" ] && export JAVA_HOME && pathmerge ${JAVA_HOME}/bin
