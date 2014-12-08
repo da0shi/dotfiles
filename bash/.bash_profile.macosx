@@ -1,4 +1,5 @@
 #.bash_profile for MacOSX
+dlog ".bash_profile.macosx load start"
 [ $(type -t brew) ] && export BREW_PREFIX=$(brew --prefix)
 [ -n "${BREW_PREFIX}" ] && BREW_CELLAR=${BREW_PREFIX}/Cellar
 
@@ -43,3 +44,4 @@ TEXLIVE_HOME=/usr/local/texlive
 TEXLIVE_VERSION=2012
 [ -d ${TEXLIVE_HOME}/${TEXLIVE_VERSION} ] || TEXLIVE_HOME=
 [ -n "${TEXLIVE_HOME}" ] && TEX_BIN=x86_64-darwin
+dlog ".bash_profile.macosx load complete"

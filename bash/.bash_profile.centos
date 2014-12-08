@@ -1,4 +1,5 @@
 #.bash_profile
+dlog ".bash_profile.centos load start"
 
 # Git
 _GIT_CONTRIB_DIR=/usr/local/etc/git-contrib
@@ -23,3 +24,4 @@ GOPATH=${HOME}/.gopath
 # Heroku
 HEROKU_HOME=/usr/local/heroku
 [ -d ${HEROKU_HOME} ] || HEROKU_HOME=
+dlog ".bash_profile.centos load complete"

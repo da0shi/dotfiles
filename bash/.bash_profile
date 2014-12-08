@@ -1,5 +1,11 @@
 #.bash_profile
 _BASH_PROFILE_=":"
+if [ ! $(type -t dlog) ]; then
+	dlog () {
+		[ -w ${HOME}/.bashdebug.log ] && echo "`date '+%Y%m%d-%H%M%S-%N'`: $*" >>${HOME}/.bashdebug.log
+	}
+fi
+dlog ".bash_profile load start"
 . ${HOME}/.bashutils
 
 . ~/.bashenv
@@ -38,3 +44,4 @@ export LD_LIBRARY_PATH
 
 # Get the aliases and functions
 [ -r ${HOME}/.bashrc ] && . ${HOME}/.bashrc
+dlog ".bash_profile load complete"

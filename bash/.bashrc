@@ -1,6 +1,11 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
-
+if [ ! $(type -t dlog) ]; then
+	dlog () {
+		[ -w ${HOME}/.bashdebug.log ] && echo "`date '+%Y%m%d-%H%M%S-%N'`: $*" >>${HOME}/.bashdebug.log
+	}
+fi
+dlog ".bashrc load start"
 [ ! ${_BASH_PROFILE_} ] && . ${HOME}/.bash_profile
 
 # history
@@ -54,3 +59,4 @@ export PAGER='less -gMj2r'
 
 [ $(type -t direnv) ] && eval "$(direnv hook $0)"
 
+dlog ".bashrc load completed"

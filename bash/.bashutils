@@ -12,7 +12,7 @@ esac
 emsg () {
 	>&2 echo $*
 }
-dmsg () {
+debuglog () {
 	local _DEBUG_LOG_FILE_=${HOME}/.bashdebug.log
 	[ ! -f "${_DEBUG_LOG_FILE_}" -a $# -ne 0 ] && return 1
 	if [ ! -f "${_DEBUG_LOG_FILE_}" -a $# -eq 0 ]; then
