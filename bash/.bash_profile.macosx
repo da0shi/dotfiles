@@ -1,43 +1,45 @@
 #.bash_profile for MacOSX
-BREW_PREFIX=$(brew --prefix)
+[ $(type -t brew) ] && export BREW_PREFIX=$(brew --prefix)
+[ -n "${BREW_PREFIX}" ] && BREW_CELLAR=${BREW_PREFIX}/Cellar
+
+# export if only on mac
+export LSCOLORS=GxDxcxdxCxegedabagacbg;
+export SSH_AUTH_SOCK=""
 
 ## Version Info
 TITANIUM_VERTION=2.1.4GA
 
+# Git
+_GIT_CONTRIB_DIR=${HOME}/.local/git-contrib
+# Bash
+_BCOMPLETION_DIR="${BREW_PREFIX}/etc"
+
 # "java"
 JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
+[ -d ${JAVA_HOME} ] || JAVA_HOME=
 _JAVA_OPTIONS="-Dfile.encoding=UTF-8"
-
-[ -n ${JAVA_HOME} ] && pathmerge ${JAVA_HOME}/bin
-
+# Scala
+SCALA_HOME=${BREW_CELLAR}/scala/2.11.2
+[ -d ${SCALA_HOME} ] || SCALA_HOME=
+# Groovy
+GRAILS_HOME=${BREW_CELLAR}/groovy/2.3.3
+[ -d ${GRAILS_HOME} ] || GRAILS_HOME=
 # Android
 ANDROID_SDK=/opt/local/android-sdk-macosx
+[ -d ${ANDROID_SDK} ] || ANDROID_SDK=
 ANDROID_NDK=/opt/local/android-ndk-macosx
+[ -d ${ANDROID_NDK} ] || ANDROID_NDK=
 
-if [ -n ${ANDROID_SDK} ]; then
-	pathmerge ${ANDROID_SDK}/tools
-	pathmerge ${ANDROID_SDK}/platform-tools
-fi
+# golang
+GOPATH=${HOME}/.gopath
+[ -d ${GOPATH} ] || GOPATH=
 
-# Scala
-SCALA_HOME=${BREW_PREFIX}/Cellar/scala/2.11.2
+# Heroku
+HEROKU_HOME=/usr/local/heroku
+[ -d ${HEROKU_HOME} ] || HEROKU_HOME=
 
 # TeX
-TEXLIVE_ROOT=/usr/local/texlive
-TEX_BIN=x86_64-darwin
-pathmerge ${TEXLIVE_ROOT}/2012/bin/${TEX_BIN}
-xpathmerge MAN ${TEXLIVE_ROOT}/2012/texmf/doc/man
-
-pathmerge /opt/local/bin
-[ -d ${HOME}/local/bin ] && pathmerge ${HOME}/local/bin
-[ -d ${HOME}/.local/bin ] && pathmerge ${HOME}/.local/bin
-
-xpathmerge LIB /usr/local/lib
-
-# export variables
-[ -n ${JAVA_HOME} ] && export JAVA_HOME
-[ -n ${_JAVA_OPTIONS} ] && export _JAVA_OPTIONS
-[ "${TERM}" != "linux" ] && export TERM=xterm-256color
-export PATH
-export MANPATH
-export LD_LIBRARY_PATH
+TEXLIVE_HOME=/usr/local/texlive
+TEXLIVE_VERSION=2012
+[ -d ${TEXLIVE_HOME}/${TEXLIVE_VERSION} ] || TEXLIVE_HOME=
+[ -n "${TEXLIVE_HOME}" ] && TEX_BIN=x86_64-darwin
