@@ -108,28 +108,14 @@ set wrapscan
 set incsearch
 
 "}}}
-if exists('g:acp_enableAtStartup')
-	function! InnsertTabWrapper()
-		let col = col('.') -1
-		if !col || getline('.')[col - 1] !~ '\k'
-			return "<\TAB>"
-		else
-			if pumvisible()
-				return "\<C-N>"
-			else
-				return "\<C-N>\<C-P>"
-			end
-		endif
-	endfunction
-endif
-
+"
+"File Type and Coding Style {{{
 let g:format_allow_over_tw = 1
 if has("syntax")
 	syntax on
 endif
 
 filetype plugin indent on
-"File Type and Coding Style {{{
 augroup vimrc_filetype
 	" Clean autocmds before setting
 	autocmd!
@@ -149,4 +135,21 @@ augroup vimrc_filetype
 	autocmd FileType css setlocal tabstop=2 shiftwidth=2
 	autocmd FileType gitcommit setlocal spell spelllang=en_us
 augroup END
+" }}}
+
+" Autocompletepop {{{
+if exists('g:acp_enableAtStartup')
+	function! InnsertTabWrapper()
+		let col = col('.') -1
+		if !col || getline('.')[col - 1] !~ '\k'
+			return "<\TAB>"
+		else
+			if pumvisible()
+				return "\<C-N>"
+			else
+				return "\<C-N>\<C-P>"
+			end
+		endif
+	endfunction
+endif
 " }}}
