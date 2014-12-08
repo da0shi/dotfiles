@@ -68,9 +68,9 @@ case ${OS} in
 		;;
 esac
 pathmerge ${TEXLIVE_ROOT}/2012/bin/${TEX_BIN}
-pathmerge MAN ${TEXLIVE_ROOT}/2012/texmf/doc/man
+xpathmerge MAN ${TEXLIVE_ROOT}/2012/texmf/doc/man
 
-pathmerge LIB /usr/local/lib
+xpathmerge LIB /usr/local/lib
 
 # export variables
 export PATH

@@ -30,7 +30,7 @@ case ${OS} in
 			pathmerge ${ANDROID_SDK}/platform-tools
 		fi
 		[ -d /usr/local/mysql ] && pathmerge /usr/local/mysql/bin
-		pathmerge LIB /usr/local/lib
+		xpathmerge LIB /usr/local/lib
 		export PATH
 		export MANPATH
 		export LD_LIBRARY_PATH

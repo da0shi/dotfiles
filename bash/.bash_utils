@@ -2,8 +2,22 @@ emsg () {
 	>&2 echo $*
 }
 pathmerge () {
+	case ":${PATH}:" in
+		*:"$1":*)
+			;;
+		*)
+			if [ "$2" = "after" ]; then
+				PATH=${PATH}:$1
+			else
+				PATH=$1:${PATH}
+			fi
+			;;
+	esac
+}
+
+xpathmerge () {
 	case "$1" in
-		MAN)
+		MAN | MANPATH)
 			case ":${MANPATH}:" in
 				*:"$2":*)
 					;;
@@ -15,7 +29,7 @@ pathmerge () {
 					fi
 			esac
 			;;
-		LIB)
+		LIB | LD_LIBRARY_PATH)
 			case ":${LD_LIBRARY_PATH}:" in
 				*:"$2":*)
 					;;
@@ -27,17 +41,6 @@ pathmerge () {
 					fi
 			esac
 			;;
-		*)
-			case ":${PATH}:" in
-				*:"$1":*)
-					;;
-				*)
-					if [ "$2" = "after" ]; then
-						PATH=${PATH}:$1
-					else
-						PATH=$1:${PATH}
-					fi
-			esac
-			;;
+		*) emsg "Usage: xpathset [MAN | LIB] path" ;;
 	esac
 }

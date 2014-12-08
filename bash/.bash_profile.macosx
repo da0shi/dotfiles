@@ -26,13 +26,13 @@ SCALA_HOME=${BREW_PREFIX}/Cellar/scala/2.11.2
 TEXLIVE_ROOT=/usr/local/texlive
 TEX_BIN=x86_64-darwin
 pathmerge ${TEXLIVE_ROOT}/2012/bin/${TEX_BIN}
-pathmerge MAN ${TEXLIVE_ROOT}/2012/texmf/doc/man
+xpathmerge MAN ${TEXLIVE_ROOT}/2012/texmf/doc/man
 
 pathmerge /opt/local/bin
 [ -d ${HOME}/local/bin ] && pathmerge ${HOME}/local/bin
 [ -d ${HOME}/.local/bin ] && pathmerge ${HOME}/.local/bin
 
-pathmerge LIB /usr/local/lib
+xpathmerge LIB /usr/local/lib
 
 # export variables
 [ -n ${JAVA_HOME} ] && export JAVA_HOME
