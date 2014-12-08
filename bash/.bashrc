@@ -57,3 +57,5 @@ export EDITOR=vim
 #pager
 export PAGER='less -gMj10'
 
+[ -d /usr/local/heroku ] && [ -z ${HEROKU_ROOT} ] && HEROKU_ROOT=/usr/local/heroku  && export PATH="${HEROKU_ROOT}/bin:$PATH"
+[ "${TERM}" = "xterm" ] && export TERM=xterm-256color
