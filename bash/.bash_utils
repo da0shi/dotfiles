@@ -6,21 +6,21 @@ pathmerge () {
 					;;
 				*)
 					if [ "$3" = "after" ]; then
-						MANPATH=${MANPATH}:$1
+						MANPATH=${MANPATH}:$2
 					else
-						MANPATH=$1:${MANPATH}
+						MANPATH=$2:${MANPATH}
 					fi
 			esac
 			;;
 		LIB)
 			case ":${LD_LIBRARY_PATH}:" in
-				*:"$1":*)
+				*:"$2":*)
 					;;
 				*)
-					if [ "$2" = "after" ]; then
-						LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:$1
+					if [ "$3" = "after" ]; then
+						LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:$2
 					else
-						LD_LIBRARY_PATH=$1:${LD_LIBRARY_PATH}
+						LD_LIBRARY_PATH=$2:${LD_LIBRARY_PATH}
 					fi
 			esac
 			;;
