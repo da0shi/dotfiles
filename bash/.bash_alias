@@ -53,7 +53,6 @@ if [ "$(uname)" == "Darwin" ]; then
 	# open app
 	# editor
 	alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
-	alias cot="/Applications/CotEditor.app/Contents/MacOS/CotEditor"
 	alias eclipse="open -a Eclipse.app"
 	# viewer
 	alias preview="open -a Preview.app"
