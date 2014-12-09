@@ -1,3 +1,4 @@
+# Common ignore files
 # bakup
 *~
 .*~
@@ -8,11 +9,4 @@
 !.gitkeep
 
 # extension
-*.elc
 *.dat
-
-# file
-.bash_history
-.viminfo
-/vim/.vim/.netrwhist
-/vim/.vim/.VimballRecord
