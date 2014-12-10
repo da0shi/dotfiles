@@ -127,13 +127,13 @@ augroup vimrc_filetype
 	" Coding Style from File Type
 	autocmd FileType vim setlocal foldmethod=marker
 	autocmd FileType markdown setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType html setlocal tabstop=2 shiftwidth=2 expandtab indentexpr&
+	autocmd FileType css setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType json setlocal tabstop=2 shiftwidth=2 expandtab
-	autocmd FileType ruby setlocal tabstop=4 shiftwidth=4 expandtab
 	autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
+	autocmd FileType ruby setlocal tabstop=4 shiftwidth=4
 	autocmd FileType php setlocal tabstop=4 shiftwidth=4
-	autocmd FileType html setlocal tabstop=2 shiftwidth=2 indentexpr&
-	autocmd FileType css setlocal tabstop=2 shiftwidth=2
 	autocmd FileType gitcommit setlocal spell spelllang=en_us
 augroup END
 " }}}
