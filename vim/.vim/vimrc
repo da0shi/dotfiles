@@ -44,6 +44,8 @@ set timeout timeoutlen=1000 ttimeoutlen=75
 inoremap <silent> <ESC> <ESC>:<C-u>set iminsert=0<CR>
 " Avoid execute <C-@> @Insert
 inoremap <C-@> <Nop>
+" Avoid to delete by <Del>
+nnoremap <Del> <Left>
 " Yank to end of the line, like 'D' / 'C' @Normal
 nnoremap Y y$
 " easier to set nohlsearch
