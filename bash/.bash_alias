@@ -26,10 +26,10 @@ alias less='less -gMj2';
 #shellscript
 
 # cd
-alias dow='cd ${HOME}/Downloads/'
-alias doc='cd ${HOME}/Documents/'
-alias desk='cd ${HOME}/Desktop/'
-alias tmp='cd ${HOME}/tmp'
+[ -d ${HOME}/Downloads ] && alias dow='cd ${HOME}/Downloads/'
+[ -d ${HOME}/Documents ] && alias doc='cd ${HOME}/Documents/'
+[ -d ${HOME}/Desktop ] && alias desk='cd ${HOME}/Desktop/'
+[ -d ${HOME}/tmp ] && alias tmp='cd ${HOME}/tmp'
 
 # for typo
 alias l='ls'
