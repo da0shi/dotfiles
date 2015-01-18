@@ -42,7 +42,7 @@ case ${TERM} in
 		export LANG=C
 		PS1='\[\e[32m\]\u@\h \[\e[33m\][\w]$(${gitps1})\[\e[0m\]\$ '
 		;;
-	xterm )
+	screen | xterm )
 		export TERM=xterm-256color
 		;;
 	* ) ;;
