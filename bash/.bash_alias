@@ -44,8 +44,7 @@ alias cpla-dashboard="mysql dashboard -u dashboard -p23W1xldgPlaQIuC6CmId"
 alias cpla-logtest="mysql log_test -u log_test -p7zmuTCcmwmg3uR7t6YXR"
 alias cpla-dashboard="mysql dashboard -u dashboard -p23W1xldgPlaQIuC6CmId"
 
-# minecraft
-alias minescreen='screen -r minecraft-client'
+[ `type -t firefox-beta` ] && alias firefox='firefox-beta'
 
 if [ "$(uname)" == "Darwin" ]; then
 	alias app="cd /Applications/"

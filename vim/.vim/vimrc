@@ -46,6 +46,8 @@ inoremap <silent> <ESC> <ESC>:<C-u>set iminsert=0<CR>
 inoremap <C-@> <Nop>
 " Yank to end of the line, like 'D' / 'C' @Normal
 nnoremap Y y$
+" Avoid execute 'x' by <Del> and move as 'h'; for HHK
+nnoremap <Del> <Left>
 " easier to set nohlsearch
 nnoremap <Esc><Esc> :noh<CR>
 
@@ -86,7 +88,9 @@ set whichwrap=b,s,<,>
 set backspace=indent,eol
 
 " Backup
+set directory=~/.vim/bkup
 set nobackup
+" set backupdir=~/.vim/bkup
 
 " Indent
 set noexpandtab

@@ -2,13 +2,13 @@
 dlog ".bash_profile.ubuntu load start"
 
 # Git
-_GIT_CONTRIB_DIR=/usr/local/etc/git-contrib
+_GIT_CONTRIB_DIR=/opt/git/contrib
 # Bash
 _BCOMPLETION_DIR=/etc
 
 # java
-JDK_VERSION=jdk1.7.0_51
-JAVA_HOME=/usr/local/java/${JDK_VERSION}
+JDK_VERSION=jdk1.8.0_11
+JAVA_HOME=/opt/java/${JDK_VERSION}
 [ -d ${JAVA_HOME} ] || JAVA_HOME=
 # scala
 SCALA_HOME=/usr/local/scala-2.11.2
