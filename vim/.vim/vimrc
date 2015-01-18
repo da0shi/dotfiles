@@ -42,10 +42,10 @@ let s:supports = VimrcSupports()
 " Turn off the IME when escaping from Insert mode @Insert
 set timeout timeoutlen=1000 ttimeoutlen=75
 inoremap <silent> <ESC> <ESC>:<C-u>set iminsert=0<CR>
+" Avoid execute 'x' by <Del> and move as 'h'; for HHK
+nnoremap <Del> <Left>
 " Avoid execute <C-@> @Insert
 inoremap <C-@> <Nop>
-" Avoid to delete by <Del>
-nnoremap <Del> <Left>
 " Yank to end of the line, like 'D' / 'C' @Normal
 nnoremap Y y$
 " Avoid execute 'x' by <Del> and move as 'h'; for HHK
@@ -91,8 +91,8 @@ set backspace=indent,eol
 
 " Backup
 set directory=~/.vim/bkup
+set backupdir=~/.vim/bkup
 set nobackup
-" set backupdir=~/.vim/bkup
 
 " Indent
 set noexpandtab
