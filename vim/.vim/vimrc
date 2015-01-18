@@ -88,6 +88,8 @@ set whichwrap=b,s,<,>
 set backspace=indent,eol
 
 " Backup
+set directory=~/.vim/bkup
+set backupdir=~/.vim/bkup
 set nobackup
 
 " Indent
