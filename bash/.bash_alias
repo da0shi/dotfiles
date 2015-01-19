@@ -21,7 +21,6 @@ alias rm="rm -i"
 alias mv="mv -i"
 alias cp="cp -i"
 alias less='less -gMj2';
-[ `type -t firefox-beta` ] && alias firefox='firefox-beta'
 
 #shellscript
 
