@@ -46,7 +46,7 @@ alias cpla-dashboard="mysql dashboard -u dashboard -p23W1xldgPlaQIuC6CmId"
 
 [ `type -t firefox-beta` ] && alias firefox='firefox-beta'
 
-if [ -d /Application ]; then
+if [ -d /Applications ]; then
 	alias app="cd /Applications/"
 	alias ls="ls -GF"
 	# open app
