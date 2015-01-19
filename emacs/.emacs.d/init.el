@@ -2,7 +2,7 @@
 ;==========BASIC SETUP==========
 ; User Setting
 (setq user-full-name "da0shi")
-(setq user-mail-address "dev@da0shi.com")
+(setq user-mail-address "whit3.develop@gmail.com")
 
 ; set config directory. (for 22 <=)
 ; use default user-emacs-directory (if 23.1 >=)
@@ -56,6 +56,23 @@
 
 ; ----- Key Bind -----
 
+; simplify add-hook when using lambda
+(defmacro add-hook-fn (name &rest body)
+	`(add-hook ,name #'(lambda () ,@body)))
+; add multiple element into list
+(defmacro append-to-list (to lst)
+	`(setq ,to (append ,lst ,to)))
+; require when library is located
+(defmacro req (lib &rest body)
+	`(when (locate-library ,(symbol-name lib))
+		(require ',lib) ,@body))
+; load lazy
+(defmacro lazyload (func lib &rest body)
+	`(when (locate-library ,lib)
+		,@(mapcar (lambda (f) `(autoload ',f ,lib nil t)) func)
+		(eval-after-load ,lib
+		 '(progn ,@body))))
+
 ;-----global-set-key-----
 ; set-key for indent-region
 (global-set-key "\C-c\C-i" 'indent-region)
@@ -104,10 +121,16 @@
 ; ----- View -----
 
 ;-----frame setting-----
-(add-to-list 'default-frame-alist '(alpha . (90 30))) ;透明度(active disactive)
-(add-to-list 'default-frame-alist '(foreground-color . "white")) ;文字
-(add-to-list 'default-frame-alist '(background-color . "gray10")) ;背景
-(add-to-list 'default-frame-alist '(cursor-color . "cyan")) ;カーソル
+(append-to-list default-frame-alist
+	'(
+		'(alpha . (90 30))
+		'(foreground-color . "white")
+		'(background-color . "gray10")
+		'(cursor-color . "cyan")))
+;(add-to-list 'default-frame-alist '(alpha . (90 30))) ;騾乗�蠎ｦ(active disactive)
+;(add-to-list 'default-frame-alist '(foreground-color . "white")) ;譁�ｭ
+;(add-to-list 'default-frame-alist '(background-color . "gray10")) ;閭梧勹
+;(add-to-list 'default-frame-alist '(cursor-color . "cyan")) ;繧ｫ繝ｼ繧ｽ繝ｫ
 (blink-cursor-mode 0)
 
 ;-----show info-----
@@ -128,7 +151,8 @@
 ; highlight inside of the paren only when paren out of the frame
 (setq show-paren-style 'mixied)
 
-; kill line including "\n / " when cursor is on line top
+; kill line including "\n / 
+" when cursor is on line top
 (setq kill-whole-line t)
 
 ; show column mode
@@ -175,94 +199,92 @@
 (icomplete-mode t)
 
 ; do not kill-buffer at *scratch*
-(add-hook 'kill-buffer-query-functions
-		  (lambda ()
+(add-hook-fn 'kill-buffer-query-functions
 			(if (string="*scratch*" (buffer-name))
 				(progn (erase-buffer) nil)
-			  t)))
+			  t))
 
 ; server setting for emacsclient
-(require 'server)
+(req server
 (unless (server-running-p)
-  (server-start))
+  (server-start)))
 
 ;==========ELISP SETUP==========
 ; Load from elisp
-(setq load-path (cons "~/.emacs.d/elisp" load-path))
-(setq load-path (cons "~/.emacs.d/elpa" load-path))
+(append-to-list load-path
+	'(
+		"~/.emacs.d/elisp"
+		"~/.emacs.d/elpa"))
 
 ; package system
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(package-initialize)
+(req package
+(append-to-list package-archives
+	'(
+		'("melpa" . "http://melpa.milkbox.net/packages/")
+		'("marmalade" . "http://marmalade-repo.org/packages/")))
+(package-initialize))
 
 ;-----standard elisp-----
 ; setup for uniquify
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
-; enable uniquify always
-(setq uniquify-min-dir-content 1)
+(req uniquify
+	 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
+	 ; enable uniquify always
+	 (setq uniquify-min-dir-content 1))
 
 ; folding source code
 ; c
-(add-hook 'c-mode-hook
-		  '(lambda ()
-			 (hs-minor-mode 1)))
+(add-hook-fn 'c-mode-hook
+			 (hs-minor-mode 1))
 ; java
-(add-hook 'java-mode-hook
-		  '(lambda ()
-			 (hs-minor-mode 1)))
+(add-hook-fn 'java-mode-hook
+			 (hs-minor-mode 1))
 ; javascript
-(add-hook 'javascript-mode-hook
-		  '(lambda ()
-			 (hs-minor-mode 1)))
+(add-hook-fn 'javascript-mode-hook
+			 (hs-minor-mode 1))
 ; lisp
-(add-hook 'lisp-mode-hook
-		  '(lambda ()
-			 (hs-minor-mode 1)))
+(add-hook-fn 'lisp-mode-hook
+			 (hs-minor-mode 1))
 ; elisp
-(add-hook 'emacs-lisp-mode-hook
-		  '(lambda ()
-			 (hs-minor-mode 1)))
+(add-hook-fn 'emacs-lisp-mode-hook
+			 (hs-minor-mode 1))
 ; define-key
 (define-key global-map (kbd "C-]") 'hs-toggle-hiding)
 
 ;-----added elisp-----
 ; setup for "install-elisp"----------
-(require 'install-elisp)
-; directory to install
-(setq install-elisp-repository-directory "~/.emacs.d/elisp")
+(req install-elisp
+	 (setq install-elisp-repository-directory "~/.emacs.d/elisp"))
+;; directory to install
 
 ; setup for "auto-install"----------
-(require 'auto-install)
-; directory to install
-(setq auto-install-directory  "~/.emacs.d/elisp")
-; enable auto-install same as install-elisp
-(auto-install-compatibility-setup)
+(req auto-install
+	 ; directory to install
+	 (setq auto-install-directory  "~/.emacs.d/elisp")
+	 ; enable auto-install same as install-elisp
+	 (auto-install-compatibility-setup))
 
 ; setup for "auto-complete"----------
-(require 'auto-complete)
-; enable auto-complete-mode always
-(global-auto-complete-mode t)
-; use C-n/C-p to select
-(define-key ac-complete-mode-map "\C-n" 'ac-next)
-(define-key ac-complete-mode-map "\C-p" 'ac-previous)
-; start completion when entered 3 characters
-(setq ac-auto-start 3)
+(req auto-complete
+	 ; enable auto-complete-mode always
+	 (global-auto-complete-mode t)
+	 ; use C-n/C-p to select
+	 (define-key ac-complete-mode-map "\C-n" 'ac-next)
+	 (define-key ac-complete-mode-map "\C-p" 'ac-previous)
+	 ; start completion when entered 3 characters
+	 (setq ac-auto-start 3))
 
 ; ddskk
-(require 'info)
-(setq load-path (cons "~/.emacs.d/elisp/skk" load-path))
-(when (require 'skk-autoloads nil t)
-  (define-key global-map (kbd "C-x C-j") 'skk-mode)
-  (setq skk-byte-compile-init-file t)
-  )
-(setq skk-use-color-cursor t)
-(setq skk-large-jisyo "/usr/share/skk/SKK-JISYO.L")
-;(setq skk-server-host "localhost"
-;	  skk-server-portnum 1178)
-(setq skk-kakutei-when-unique-candidate t)
+(req info
+	 (setq load-path (cons "~/.emacs.d/elisp/skk" load-path))
+	 (when (require 'skk-autoloads nil t)
+	   (define-key global-map (kbd "C-x C-j") 'skk-mode)
+	   (setq skk-byte-compile-init-file t)
+	   )
+	 (setq skk-use-color-cursor t)
+	 (setq skk-large-jisyo "/usr/share/skk/SKK-JISYO.L")
+	 ;(setq skk-server-host "localhost"
+	 ;	  skk-server-portnum 1178)
+	 (setq skk-kakutei-when-unique-candidate t))
 
 
 ;==========MAJOR MODE SETUP==========
