@@ -43,32 +43,9 @@ alias cpla-dashboard="mysql dashboard -u dashboard -p23W1xldgPlaQIuC6CmId"
 alias cpla-logtest="mysql log_test -u log_test -p7zmuTCcmwmg3uR7t6YXR"
 alias cpla-dashboard="mysql dashboard -u dashboard -p23W1xldgPlaQIuC6CmId"
 
-[ `type -t firefox-beta` ] && alias firefox='firefox-beta'
-
 if [ -d /Applications ]; then
 	alias app="cd /Applications/"
 	alias ls="ls -GF"
-	# open app
-	# editor
-	alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
-	alias eclipse="open -a Eclipse.app"
-	# viewer
-	alias preview="open -a Preview.app"
-	# browser
-	alias firefox="open -a Firefox.app"
-	alias chrome="open -a 'Google Chrome.app'"
-	alias opera="open -a Opera.app"
-	alias safari="open -a Safari.app"
-	# mailer
-	alias mailer="open -a Mail.app"
-	alias thunder="open -a Thunderbird.app"
-	# chat
-	alias skype="open -a Skype.app"
-	alias ichat="open -a iChat.app"
-	# microsoft
-	alias Word="open -a 'Microsoft Word.app'"
-	alias Excel="open -a 'Microsoft Excel.app'"
-	alias PowerPoint="open -a 'Microsoft PowerPoint.app'"
 fi
 if [ `type -t apt-get` ]; then
 	# Add an "alert" alias for long running commands.  Use like so:
