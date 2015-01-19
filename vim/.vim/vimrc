@@ -60,6 +60,8 @@ cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 cnoremap <C-h> <Backspace>
 cnoremap <C-d> <Del>
+" one-liner for Emacs-like line delete
+cnoremap <C-k> <C-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
 inoremap <C-h> <Backspace>
 inoremap <C-d> <Del>
 
