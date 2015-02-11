@@ -77,3 +77,11 @@ xpathmerge () {
 		*) emsg "Usage: xpathset [MAN | LIB] path" ;;
 	esac
 }
+
+loop () {
+	while (true)
+	do
+		$@;
+		sleep 3;
+	done
+}
