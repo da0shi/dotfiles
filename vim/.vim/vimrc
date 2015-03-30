@@ -133,6 +133,7 @@ augroup vimrc_filetype
 	autocmd BufNewFile,BufRead *.twig setlocal filetype=htmljinja
 	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
 	autocmd BufNewFile,BufRead .bash* setlocal filetype=sh
+	autocmd BufNewFile,BufRead *.gradle setlocal filetype=groovy
 	" Coding Style from File Type
 	autocmd FileType vim setlocal foldmethod=marker
 	autocmd FileType markdown setlocal tabstop=2 shiftwidth=2 expandtab
