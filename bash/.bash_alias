@@ -46,6 +46,7 @@ alias cpla-dashboard="mysql dashboard -u dashboard -p23W1xldgPlaQIuC6CmId"
 if [ -d /Applications ]; then
 	alias app="cd /Applications/"
 	alias ls="ls -GF"
+	alias preview="open -a Preview"
 fi
 if [ `type -t apt-get` ]; then
 	# Add an "alert" alias for long running commands.  Use like so:
