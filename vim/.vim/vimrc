@@ -103,7 +103,7 @@ set cindent
 set smartindent
 set smarttab
 set list
-set listchars=tab:^\ ,eol:<,trail:_,nbsp:%
+set listchars=tab:^\ ,eol:~,trail:_,nbsp:%
 set tabstop=4
 set shiftwidth=4
 set softtabstop=0
