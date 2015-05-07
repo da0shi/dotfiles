@@ -39,6 +39,10 @@ GOPATH=${HOME}/.gopath
 HEROKU_HOME=/usr/local/heroku
 [ -d ${HEROKU_HOME} ] || HEROKU_HOME=
 
+# nvm
+NVM_DIR=~/.nvm
+[ -d ${NVM_DIR} ] || NVM_DIR=
+
 # TeX
 TEXLIVE_HOME=/usr/local/texlive
 TEXLIVE_VERSION=2012

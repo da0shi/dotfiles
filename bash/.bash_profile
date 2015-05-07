@@ -21,6 +21,7 @@ dlog ".bash_profile load start"
 [ -n "${SCALA_HOME}" ] && export SCALA_HOME && pathmerge ${SCALA_HOME}/bin
 [ -n "${GRAILS_HOME}" ] && export GRAILS_HOME && pathmerge ${GRAILS_HOME}/bin
 [ -n "${GOPATH}" ] && export GOPATH && pathmerge ${GOPATH}/bin
+[ -n "${NVM_DIR}" ] && export NVM_DIR && source $(brew --prefix nvm)/nvm.sh
 if [ -n "${ANDROID_SDK}" ]; then
 	pathmerge ${ANDROID_SDK}/tools
 	pathmerge ${ANDROID_SDK}/platform-tools
