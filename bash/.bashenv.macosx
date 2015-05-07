@@ -45,7 +45,7 @@ NVM_DIR=~/.nvm
 
 # TeX
 TEXLIVE_HOME=/usr/local/texlive
-TEXLIVE_VERSION=2012
+TEXLIVE_VERSION=2014
 [ -d ${TEXLIVE_HOME}/${TEXLIVE_VERSION} ] || TEXLIVE_HOME=
 [ -n "${TEXLIVE_HOME}" ] && TEX_BIN=x86_64-darwin
 dlog ".bash_profile.macosx load complete"
