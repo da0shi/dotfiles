@@ -18,18 +18,20 @@ HISTFILESIZE=2000
 shopt -s checkwinsize
 . ~/.bashrcenv
 
-[ -z "${gitps1}" ] && gitps1=":"
-if [ -r ${_GIT_CONTRIB_DIR}/completion/git-prompt.sh ]; then
-	[ "${gitps1}" == ":" ] && . ${_GIT_CONTRIB_DIR}/completion/git-prompt.sh
-fi
-if [ -r ${_GIT_CONTRIB_DIR}/completion/git-completion.bash ]; then
-	[ "${gitps1}" == ":" ] && . ${_GIT_CONTRIB_DIR}/completion/git-completion.bash
-fi
-[ $(type -t __git_ps1) ] && gitps1="__git_ps1"
-
 if [ -f ${_BCOMPLETION_DIR}/bash_completion ] && ! shopt -oq posix; then
 	[ -z "${BASH_COMPLETION_COMPAT_DIR}" ] && . ${_BCOMPLETION_DIR}/bash_completion
 fi
+
+[ $(type -t __git_ps1) ] && gitps1="__git_ps1"
+[ -z "${gitps1}" ] && gitps1=":"
+if [ -r ${_GIT_CONTRIB_DIR}/completion/git-prompt.sh ]; then
+	[ "${gitps1}" == ":" ] && . ${_GIT_CONTRIB_DIR}/completion/git-prompt.sh
+	gitps1="__git_ps1"
+fi
+if [ -r ${_GIT_CONTRIB_DIR}/completion/git-completion.bash ]; then
+	[ $(type -t __git_complete) ] || . ${_GIT_CONTRIB_DIR}/completion/git-completion.bash
+fi
+
 
 # prompt
 # assume we have color support
