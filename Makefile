@@ -29,7 +29,7 @@ test:
 	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/test/test.sh
 
 update:
-	git pull --rebase origin/master master
+	git pull --rebase origin master
 	git submodule init
 	git submodule update
 	git submodule foreach git pull origin master
