@@ -10,3 +10,8 @@
 
 # extension
 *.dat
+
+.viminfo
+.vim/.netrwhist
+.vim/.VimballRecord
+

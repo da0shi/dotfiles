@@ -147,6 +147,7 @@ augroup vimrc_filetype
 	autocmd FileType php setlocal tabstop=4 shiftwidth=4
 	autocmd FileType gitcommit setlocal spell spelllang=en_us
 	autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType * setlocal formatoptions-=ro
 augroup END
 " }}}
 
