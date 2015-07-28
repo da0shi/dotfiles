@@ -1,6 +1,6 @@
 [user]
 	name = da0shi
-	email = dev@da0shi.com
+	email = whit3.develop@gmail.com
 [core]
 	editor = vim
 	pager = less -r
@@ -10,18 +10,34 @@
 [color]
 	ui = auto
 [alias]
-	co = checkout
-	st = status
-	br = branch
-	mg = merge
-	logg = log --graph --decorate
-	lg = log --graph --decorate --oneline
-	llg = log --graph --decorate --oneline --stat
+	life       = !echo "No Git, No Life"
+	aliass     = !git config --get-regexp alias
+	me         = !git config --get-regexp user
+	l          = log --decorate --oneline
+	ls         = log --decorate --oneline --stat
+	lg         = log --decorate --oneline --graph
+	nerge      = merge --no-ff
+	purr       = pull --rebase
+	stat       = status --short --branch
+	ibase      = !sh -c 'git rebase -i $(git merge-base ${1:-master} HEAD)' -
+	unstage    = reset HEAD --
+	cancel     = reset --soft HEAD^
+	skip       = update-index --skip-worktree
+	noskip     = update-index --no-skip-worktree
 [help]
-	autocorrect = 1
+	autocorrect = 0
 [push]
 	default = simple
 [merge]
 	conflictstyle = diff3
 [github]
 	user = da0shi
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
