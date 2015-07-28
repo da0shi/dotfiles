@@ -130,10 +130,13 @@ augroup vimrc_filetype
 
 	" File Type from Extension
 	autocmd BufNewFile,BufRead *.ctp setlocal filetype=php
+	autocmd BufNewFile,BufRead *.twig setlocal filetype=htmljinja
 	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
 	autocmd BufNewFile,BufRead .bash* setlocal filetype=sh
 	autocmd BufNewFile,BufRead *.tex setlocal filetype=tex
 	autocmd BufNewFile,BufRead *.sbt setlocal filetype=scala
+	autocmd BufNewFile,BufRead *.gradle setlocal filetype=groovy
+
 	" Coding Style from File Type
 	autocmd FileType vim setlocal foldmethod=marker
 	autocmd FileType markdown setlocal tabstop=2 shiftwidth=2 expandtab
@@ -143,8 +146,9 @@ augroup vimrc_filetype
 	autocmd FileType coffee setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType json setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
-	autocmd FileType ruby setlocal tabstop=2 shiftwidth=2
+	autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType php setlocal tabstop=4 shiftwidth=4
+	autocmd FileType jinja setlocal tabstop=4 shiftwidth=4 expandtab
 	autocmd FileType gitcommit setlocal spell spelllang=en_us
 	autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType * setlocal formatoptions-=ro

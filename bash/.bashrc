@@ -62,3 +62,4 @@ export PAGER='less -gMj2r'
 [ $(type -t direnv) ] && eval "$(direnv hook $0)"
 
 dlog ".bashrc load completed"
+
