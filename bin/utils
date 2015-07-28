@@ -1,0 +1,309 @@
+#!/bin/bash
+
+export PLATFORM
+
+readonly _TAB_="$(printf "\t")"
+readonly _SPACE_=' '
+readonly _BLANK_="${_SPACE_}${_TAB_}"
+readonly _IFS_="$IFS"
+
+ostype () {
+	uname | lower
+}
+
+os_detect ()
+{
+	export PLATFORM
+	case "$(ostype)" in
+		*linux*)   PLATFORM="linux"   ;;
+		*darwin*)  PLATFORM="osx"     ;;
+		*bsd*)     PLATFORM="bsd"     ;;
+		*)         PLATFORM="unknown" ;;
+	esac
+}
+
+is_linux()
+{
+	os_detect
+	if [ "$PLATFORM" = "linux" ]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+is_osx ()
+{
+	os_detect
+	if [ "$PLATFORM" = "osx" ]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+is_bsd ()
+{
+	os_detect
+	if [ "$PLATFORM" = "bsd" ]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+get_os ()
+{
+	local os
+	for os in osx linux bsd
+	do
+		if is_$os; then
+			echo $os
+		fi
+	done
+}
+
+e_newline() {
+	printf "\n"
+}
+echon ()
+{
+	echo "$*" | tr -d '\n'
+}
+
+lower ()
+{
+	if [ $# -eq 0 ]; then
+		cat <&0
+	elif [ $# -eq 1 ]; then
+		if [ -f "$1" -a -r "$1" ]; then
+			cat "$1"
+		else
+			echo "$1"
+		fi
+	else
+		return 1
+	fi | tr "[:upper:]" "[:lower:]"
+}
+
+upper ()
+{
+	if [ $# -eq 0 ]; then
+		cat <&0
+	elif [ $# -eq 1 ]; then
+		if [ -f "$1" -a -r "$1" ]; then
+			cat "$1"
+		else
+			echo "$1"
+		fi
+	else
+		return 1
+	fi | tr "[:lower:]" "[:upper:]"
+}
+
+contains ()
+{
+	echo "$1" |
+		grep "$2" >/dev/null 2>&1
+	return $?
+}
+
+len ()
+{
+	local length="$(echo "$1" | wc -c | sed -e 's/ */')"
+	echo $(expr $length - 1)
+}
+
+is_empty ()
+{
+	if [ $# -eq 0 ]; then
+		cat <&0
+	else
+		echo "$1"
+	fi
+	return $?
+}
+
+is_exists()
+{
+	which "$1" >/dev/null 2>&1
+	return $?
+}
+
+has()
+{
+	is_exists "$1"
+}
+
+is_interactive_shell ()
+{
+	[ ! -z "$PS1" ]
+}
+
+is_ssh_running()
+{
+	[ ! -z "$SSH_CLIENT" ]
+}
+
+is_tmux_running()
+{
+	[ ! -z "$TMUX" ]
+}
+
+is_screen_running()
+{
+	[ ! -z "$STY" ]
+}
+
+is_screen_or_tmux_running()
+{
+	is_screen_running || is_tmux_running
+}
+
+is_debug() {
+	if [ "$DEBUG" = 1 ]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+e_newline() {
+	printf "\n"
+}
+
+e_header() {
+	printf " \033[37;1m%s\033[m\n" "$*"
+}
+
+e_error() {
+	printf " \033[31m%s\033[m\n" "✖ $*" 1>&2
+}
+
+e_warning() {
+	printf " \033[31m%s\033[m\n" "$*"
+}
+
+e_done() {
+	printf " \033[37;1m%s\033[m...\033[32mOK\033[m\n" "✔ $*"
+}
+
+e_arrow() {
+	printf " \033[37;1m%s\033[m\n" "➜ $*"
+}
+
+e_indent() {
+	for ((i=0; i<${1:-4}; i++)); do
+		echon " "
+	done
+	if [ -n "$2" ]; then
+		echo "$2"
+	else
+		cat <&0
+	fi
+}
+
+e_success() {
+	printf " \033[37;1m%s\033[m%s...\033[32mOK\033[m\n" "✔ " "$*"
+}
+
+e_failure() {
+	die "${1:-$FUNCNAME}"
+}
+
+ink ()
+{
+	if [ $# -eq 0 -o $# -gt 2 ]; then
+		echo "Usage: ink <color> <text>"
+		echo "Colors:"
+		echo "  black, white, red, green, yellow, blue, purple, cyan, gray"
+		return 1
+	fi
+
+	local readonly open="\033["
+	local readonly close="${open}0m"
+	local readonly black='0;30m'
+	local readonly red='0;31m'
+	local readonly green='0;32m'
+	local readonly yellow='0;33m'
+	local readonly blue='0;34m'
+	local readonly purple='0;35m'
+	local readonly cyan='0;36m'
+	local readonly gray='0;37m'
+	local readonly white="$close"
+
+	local text=$1
+	local color=$close
+
+	if [ $# -eq 2 ]; then
+		text="$2"
+		case "$1" in
+			black | white | red | green | yellow | blue | purple | cyan | gray)
+				eval color="\$$1"
+				;;
+		esac
+	fi
+
+	printf "${open}${color}${text}${close}"
+}
+
+die () {
+	e_error "$1" 1>&2
+	exit "${2:-1}"
+}
+
+pathmerge() {
+	if [ $# -eq 0 -o $# -gt 2 ]; then
+		echo "Usage: pathmerge <path> [after]"
+		return 1
+	fi
+
+	case ":${PATH}:" in
+		*:"$1":*) ;;
+		*)
+			if [ "$2" = "after" ]; then
+				PATH=${PATH}:$1
+			else
+				PATH=$1:${PATH}
+			fi
+			;;
+	esac
+}
+
+manpathmerge ()
+{
+	if [ $# -eq 0 -o $# -gt 2 ]; then
+		echo "Usage: manpathmerge <path> [after]"
+		return 1
+	fi
+
+	case ":${MANPATH}:" in
+		*:"$1":*) ;;
+		*)
+			if [ "$2" = "after" ]; then
+				MANPATH=${MANPATH}:$1
+			else
+				MANPATH=$1:${MANPATH}
+			fi
+			;;
+	esac
+}
+
+libpathmerge ()
+{
+	if [ $# -eq 0 -o $# -gt 2 ]; then
+		echo "Usage: libpathmerge <path> [after]"
+		return 1
+	fi
+
+	case ":${LD_LIBRARY_PATH}:" in
+		*:"$1":*) ;;
+		*)
+			if [ "$2" = "after" ]; then
+				LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:$1
+			else
+				LD_LIBRARY_PATH=$1:${LD_LIBRARY_PATH}
+			fi
+			;;
+	esac
+}
