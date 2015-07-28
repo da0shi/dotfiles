@@ -1,6 +1,0 @@
-# extension
-*.elc
-
-.emacs.d/auto-save-list
-.emacs.d/elisp
-.emacs.d/elpa

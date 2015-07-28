@@ -6,12 +6,18 @@
 .*.swp
 *.orig
 
-!.gitkeep
-
-# extension
+# Data
 *.dat
 
+# Vim
 .viminfo
 .vim/.netrwhist
 .vim/.VimballRecord
 
+# Emacs
+*.elc
+.emacs.d/auto-save-list
+.emacs.d/elisp
+.emacs.d/elpa
+
+!.gitkeep

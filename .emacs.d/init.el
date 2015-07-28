@@ -15,15 +15,6 @@
 	ns-p      (eq window-system 'ns)
 	carbon-p  (eq window-system 'mac)
 	linux-p   (eq system-type 'gnu/linux)
-;	colinux-p (when linux-p
-;				(let ((file "/proc/modules"))
-;					(and
-;					(file-readable-p file)
-;					(x->bool
-;						(with-temp-buffer
-;						(insert-file-contents file)
-;						(goto-char (point-min))
-;						(re-search-forward "^cofuse\.+" nil t))))))
 	cygwin-p  (eq system-type 'cygwin)
 	nt-p      (eq system-type 'windows-nt)
 	meadow-p  (featurep 'meadow)
@@ -151,14 +142,14 @@
 ; highlight inside of the paren only when paren out of the frame
 (setq show-paren-style 'mixied)
 
-; kill line including "\n / 
-" when cursor is on line top
+; kill line including "\n"
+; when cursor is on line top
 (setq kill-whole-line t)
 
 ; show column mode
 (column-number-mode t)
 
-; hide menu bar when you opened with "emacs -nw"
+; hide menu bar when you opened with 'emacs -nw'
 (if window-system
 	(menu-bar-mode 1)
   (menu-bar-mode -1))
@@ -230,6 +221,16 @@
 	 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 	 ; enable uniquify always
 	 (setq uniquify-min-dir-content 1))
+
+; switch buffer
+(req ido
+ (ido-mode 'bffers)
+ (setq ido-ignore-buffers '(
+							"^ "
+							"*Completions*"
+							"*Shell Command Output*"
+							"*Messages*"
+							"Async Shell Command")))
 
 ; folding source code
 ; c
