@@ -20,7 +20,7 @@ JAVA_HOME=$(/usr/libexec/java_home)
 [ -d ${JAVA_HOME} ] || JAVA_HOME=
 _JAVA_OPTIONS="-Dfile.encoding=UTF-8"
 # Scala
-SCALA_HOME=${BREW_CELLAR}/scala/2.11.2
+SCALA_HOME=${BREW_CELLAR}/scala/2.11.7
 [ -d ${SCALA_HOME} ] || SCALA_HOME=
 # Groovy
 GRAILS_HOME=${BREW_CELLAR}/groovy/2.3.3
