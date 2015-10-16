@@ -1,5 +1,5 @@
 [user]
-	name = da0shi
+	name = takayukioda
 	email = whit3.develop@gmail.com
 [core]
 	editor = vim
@@ -7,6 +7,7 @@
 	autocrlf = false
 	quotepath = false
 	filemode = false
+	excludesfile = ~/.globalignore
 [color]
 	ui = auto
 [alias]
@@ -31,7 +32,7 @@
 [merge]
 	conflictstyle = diff3
 [github]
-	user = da0shi
+	user = takayukioda
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
