@@ -1,12 +1,14 @@
 [user]
-	name = da0shi
-	email = whit3.develop@gmail.com
+	name = takayukioda
+	email = takayuki@odashi.me
+	username = da0shi
 [core]
 	editor = vim
 	pager = less -r
 	autocrlf = false
 	quotepath = false
 	filemode = false
+	excludesfile = /Users/da0shi/.globalignore
 [color]
 	ui = auto
 [alias]
@@ -41,3 +43,7 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
