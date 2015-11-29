@@ -61,5 +61,6 @@ export PAGER='less -gMj2r'
 
 [ $(type -t direnv) ] && eval "$(direnv hook $0)"
 
+export CHATWORK_API="68d5ef13e0682dd3217d75aa8f47d98c"
 dlog ".bashrc load completed"
 
