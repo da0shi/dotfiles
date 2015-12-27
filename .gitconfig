@@ -1,6 +1,6 @@
 [user]
 	name = takayukioda
-	email = whit3.develop@gmail.com
+	email = takayuki@odashi.me
 [core]
 	editor = vim
 	pager = less -r
@@ -25,6 +25,7 @@
 	cancel     = reset --soft HEAD^
 	skip       = update-index --skip-worktree
 	noskip     = update-index --no-skip-worktree
+	plune      = !git branch --merged | grep -vE '(master|develop|release|\\*)' | xargs git branch -d
 [help]
 	autocorrect = 0
 [push]
