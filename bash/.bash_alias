@@ -22,6 +22,13 @@ alias mv="mv -i"
 alias cp="cp -i"
 alias less='less -gMj2';
 
+# for typo
+alias l='ls'
+alias s='ls'
+alias sl='ls'
+# alias tsk='task'
+# alias taks='task'
+
 #shellscript
 
 # cd
@@ -30,18 +37,9 @@ alias less='less -gMj2';
 [ -d ${HOME}/Desktop ] && alias desk='cd ${HOME}/Desktop/'
 [ -d ${HOME}/tmp ] && alias tmp='cd ${HOME}/tmp'
 
-# for typo
-alias l='ls'
-alias s='ls'
-alias sl='ls'
-alias tsk='task'
-alias taks='task'
 
 
 ## database
-alias cpla-dashboard="mysql dashboard -u dashboard -p23W1xldgPlaQIuC6CmId"
-alias cpla-logtest="mysql log_test -u log_test -p7zmuTCcmwmg3uR7t6YXR"
-alias cpla-dashboard="mysql dashboard -u dashboard -p23W1xldgPlaQIuC6CmId"
 
 if [ -d /Applications ]; then
 	alias app="cd /Applications/"
@@ -56,8 +54,4 @@ if [ `type -t apt-get` ]; then
 	alias aptcheck="sudo apt-get update && sudo apt-get upgrade"
 	alias aptclean="sudo apt-get autoremove && sudo apt-get autoclean"
 	alias aptsearch="apt-cache search"
-
-	alias skype-da0shi="skype --dbpath=.Skype"
-	alias skype-shida0="skype --dbpath=.skype.shida0"
-	alias skype-livedevelop="skype --dbpath=.skype.live.develop"
 fi
