@@ -71,6 +71,8 @@ cnoremap <C-n> <Down>
 " }}}
 
 " Misc {{{
+" Set to use 16 colors terminal option
+set t_Co=16
 set modeline
 set showtabline=2
 
@@ -92,8 +94,8 @@ set whichwrap=b,s,<,>
 set backspace=indent,eol
 
 " Backup
-set directory=~/.vim/bkup
-set backupdir=~/.vim/bkup
+set directory=~/.vim/swp
+set backupdir=~/.vim/swp
 set nobackup
 
 " Indent
