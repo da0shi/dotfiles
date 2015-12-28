@@ -11,6 +11,7 @@ dlog ".bash_profile load start"
 . ~/.bashenv
 
 # optional bin directory made by user
+[ -d /opt/bin ] && pathmerge /opt/bin
 [ -d /opt/local/bin ] && pathmerge /opt/local/bin
 [ -d ${HOME}/local/bin ] && pathmerge ${HOME}/local/bin
 [ -d ${HOME}/.local/bin ] && pathmerge ${HOME}/.local/bin
@@ -19,7 +20,9 @@ dlog ".bash_profile load start"
 [ -n "${JAVA_HOME}" ] && export JAVA_HOME && pathmerge ${JAVA_HOME}/bin
 [ -n "${_JAVA_OPTIONS}" ] && export _JAVA_OPTIONS
 [ -n "${SCALA_HOME}" ] && export SCALA_HOME && pathmerge ${SCALA_HOME}/bin
+[ -n "${SBT_HOME}" ] && export SBT_HOME && pathmerge ${SBT_HOME}/bin
 [ -n "${GRAILS_HOME}" ] && export GRAILS_HOME && pathmerge ${GRAILS_HOME}/bin
+[ -n "${GOROOT}" ] && export GOROOT && pathmerge ${GOROOT}/bin
 [ -n "${GOPATH}" ] && export GOPATH && pathmerge ${GOPATH}/bin
 [ -n "${NVM_DIR}" ] && export NVM_DIR && source $(brew --prefix nvm)/nvm.sh
 if [ -n "${ANDROID_SDK}" ]; then

@@ -7,12 +7,13 @@ _GIT_CONTRIB_DIR=/opt/git/contrib
 _BCOMPLETION_DIR=/etc
 
 # java
-JDK_VERSION=jdk1.8.0_11
+JDK_VERSION=jdk1.8.0_25
 JAVA_HOME=/opt/java/${JDK_VERSION}
 [ -d ${JAVA_HOME} ] || JAVA_HOME=
 # scala
-SCALA_HOME=/usr/local/scala-2.11.2
+SCALA_HOME=/usr/local/scala-2.11.7
 [ -d ${SCALA_HOME} ] || SCALA_HOME=
+SBT_HOME=/opt/scala/sbt-0.13.8
 # groovy
 GRAILS_HOME=/usr/share/groovy
 [ -d ${GRAILS_HOME} ] || GRAILS_HOME=
@@ -23,7 +24,8 @@ ANDROID_NDK=/usr/local/android-ndk
 [ -d ${ANDROID_NDK} ] || ANDROID_NDK=
 
 # golang
-GOPATH=${HOME}/.gopath
+GOROOT=/usr/local/go
+GOPATH=${HOME}/go
 [ -d ${GOPATH} ] || GOPATH=
 
 # Heroku
