@@ -39,8 +39,6 @@ alias sl='ls'
 
 
 
-## database
-
 if [ -d /Applications ]; then
 	alias app="cd /Applications/"
 	alias ls="ls -GF"
@@ -51,7 +49,15 @@ if [ `type -t apt-get` ]; then
 	#   sleep 10; alert
 	alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e "\""s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//"\"")"'
 	# custom command
-	alias aptcheck="sudo apt-get update && sudo apt-get upgrade"
-	alias aptclean="sudo apt-get autoremove && sudo apt-get autoclean"
+	alias aptupgrade="sudo apt-get update && sudo apt-get upgrade -y"
+	alias aptcleanup="sudo apt-get autoremove && sudo apt-get autoclean"
 	alias aptsearch="apt-cache search"
 fi
+
+docker-noname () {
+	docker images --filter "dangling=true" -q
+}
+
+pswd () {
+	strings /dev/urandom | grep -v '\s' | head -n 30 | tr -d '\n' | cut -b -${1:-16}
+}
