@@ -3,7 +3,7 @@
 	email = takayuki@odashi.me
 [core]
 	editor = vim
-	pager = less -r
+	pager = less -r -FX
 	autocrlf = false
 	quotepath = false
 	filemode = false
