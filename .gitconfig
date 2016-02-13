@@ -25,7 +25,7 @@
 	cancel     = reset --soft HEAD^
 	skip       = update-index --skip-worktree
 	noskip     = update-index --no-skip-worktree
-	plune      = !git branch --merged | grep -vE '(master|develop|release|\\*)' | xargs git branch -d
+	plune      = !git branch --merged | grep -vE '(master|develop|release|gh-pages|\\*)' | xargs git branch -d
 [help]
 	autocorrect = 0
 [push]
