@@ -1,11 +1,5 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
-if [ ! $(type -t dlog) ]; then
-	dlog () {
-		[ -w ${HOME}/.bashdebug.log ] && echo "`date '+%Y%m%d-%H%M%S-%N'`: $*" >>${HOME}/.bashdebug.log
-	}
-fi
-dlog ".bashrc load start"
 [ ! ${_BASH_PROFILE_} ] && . ${HOME}/.bash_profile
 
 # history
@@ -16,7 +10,6 @@ HISTFILESIZE=2000
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
-. ~/.bashrcenv
 
 if [ -f ${_BCOMPLETION_DIR}/bash_completion ] && ! shopt -oq posix; then
 	[ -z "${BASH_COMPLETION_COMPAT_DIR}" ] && . ${_BCOMPLETION_DIR}/bash_completion
@@ -61,5 +54,7 @@ export PAGER='less -gMj2r'
 
 [ $(type -t direnv) ] && eval "$(direnv hook $0)"
 
-dlog ".bashrc load completed"
 
+
+export NVM_DIR="/home/da0shi/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

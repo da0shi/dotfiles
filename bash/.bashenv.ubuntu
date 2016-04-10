@@ -1,5 +1,4 @@
 #.bash_profile
-dlog ".bash_profile.ubuntu load start"
 
 # Git
 _GIT_CONTRIB_DIR=/opt/git/contrib
@@ -37,4 +36,3 @@ TEXLIVE_HOME=/usr/local/texlive
 TEXLIVE_VERSION=2013
 [ -d ${TEXLIVE_HOME}/${TEXLIVE_VERSION} ] || TEXLIVE_HOME=
 [ -n "${TEXLIVE_HOME}" ] && TEX_BIN=x86_64-darwin
-dlog ".bash_profile.ubuntu load complete"
