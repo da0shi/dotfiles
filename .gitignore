@@ -10,14 +10,17 @@
 *.dat
 
 # Vim
-.viminfo
-.vim/.netrwhist
-.vim/.VimballRecord
+_viminfo
+_vim/.netrwhist
+_vim/.VimballRecord
+_vim/**/*.vim
+_vim/syntax/html
+_vim/syntax/javascript
 
 # Emacs
 *.elc
-.emacs.d/auto-save-list
-.emacs.d/elisp
-.emacs.d/elpa
+_emacs.d/auto-save-list
+_emacs.d/elisp
+_emacs.d/elpa
 
 !.gitkeep
