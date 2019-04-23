@@ -9,6 +9,9 @@
 # Data
 *.dat
 
+# Bash
+_bash_history
+
 # Vim
 _viminfo
 _vim/.netrwhist
