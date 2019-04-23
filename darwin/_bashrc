@@ -1,0 +1,217 @@
+#!/bin/bash
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+: "history" && {
+	HISTCONTROL=ignoreboth
+	HISTSIZE=5000
+	HISTFILESIZE=10000
+}
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+[ -z "${HOMEBREW_PREFIX}" -a -d /usr/local/Cellar ] && export HOMEBREW_PREFIX=/usr/local
+
+: "bash-completion" && {
+	# Check if `bash-completion` formula is installed
+	if [ -f ${HOMEBREW_PREFIX}/etc/bash_completion ] && ! shopt -oq posix; then
+		. ${HOMEBREW_PREFIX}/etc/bash_completion
+	elif [ -d ${HOMEBREW_PREFIX}/etc/bash_completion.d ] && ! shopt -oq posix; then
+		bash_completion_dir=${HOMEBREW_PREFIX}/etc/bash_completion.d
+		for completion in $(/bin/ls ${bash_completion_dir})
+		do
+			[ -f ${bash_completion_dir}/${completion} ] && . ${bash_completion_dir}/${completion}
+		done
+	fi
+}
+
+: "git-prompt" && {
+	# Check if git ps is already loaded or not; bash-completion might loaded already
+	type -t __git_ps1 >/dev/null && gitps1="__git_ps1"
+	if [ -z "${gitps1}" ]; then
+		gitps1=":"
+		git_completion_dir=${HOMEBREW_PREFIX}/opt/git/etc/bash_completion.d
+		[ -f ${git_completion_dir}/git-prompt.sh ] && . ${git_completion_dir}/git-prompt.sh
+
+		type -t __git_ps1 >/dev/null && gitps1="__git_ps1"
+	fi
+}
+
+: "prompt" && {
+	# assume we have color support
+	PS1='\[\e]0;\w\a\]\[\e[33m\]\w\[\e[35m\]$(${gitps1})\n\[\e[36m\]\D{%m-%d %R} \[\e[32m\]\u@\h\[\e[0m\] \$ '
+	case ${TERM} in
+		eterm-color | dumb )
+			PS1='\w$(${gitps1})\n\D{%R} \u@\h \$ '
+			;;
+		linux )
+			export LC_CTYPE=C
+			export LANG=C
+			PS1='\[\e[33m\]\w\[\e[35m\]$(${gitps1})\n\[\e[36m\]\D{%R} \[\e[32m\]\u@\h\[\e[0m\] \$ '
+			;;
+		screen | xterm )
+			TERM=xterm-256color
+			;;
+		* ) ;;
+	esac
+}
+
+: "exports" && {
+	export TERM
+	export PS1
+}
+
+: "alias" && {
+	[ -f ${HOME}/.bash_alias ] && . ${HOME}/.bash_alias
+}
+
+: "functions" && {
+	__history_without_id__() {
+		sed -E 's/^ *[0-9]+\*? *//' <(history)
+	}
+
+	: "fzf" && which fzf &>/dev/null && {
+		__fzf_history__() {
+			__history_without_id__ | fzf --prompt="History>" --tac --no-sort --select-1 --exit-0
+		}
+		bind '"\C-r": "\C-e\C-u`__fzf_history__`\e\C-e\e^"'
+
+		finz() {
+			local ext=${1:-''}
+			local dir=${2:-.}
+			find ${dir} -name "*${ext}" | fzf --prompt="${ext:-File}>" --select-1 --exit-0
+		}
+
+		__fzf_github__() {
+			find -L ${HOME}/github.com -type d -maxdepth 2 | fzf --prompt="Project>" --query="$1" --select-1 --exit-0
+		}
+
+		fd() {
+			local to=$(__fzf_github__ $1)
+			cd ${to:-.}
+		}
+		__fzf_npmrun__() {
+			local cur prev cword
+			_get_comp_words_by_ref -n : cur prev cword
+			if [ "$prev" = "run" ]; then
+				COMPREPLY=$(jq -r '.scripts | keys[]' package.json | fzf --query=$cur --select-1 --exit-0)
+			fi
+		}
+		complete -F __fzf_npmrun__ npm
+	}
+
+	: "peco" && which peco &>/dev/null && {
+		__peco_history__() {
+			# focused on getting unique command list
+			# sed -E 's/^ +[0-9]+\*? *//' <(history) | sort | uniq | peco --prompt "HISTORY>"
+
+			# focused on going back history even commands are duplicated
+			# `tar -r` for reversing the all lines
+			# note: `-r` option in tail command is only available on mac
+			sed -E 's/^ *[0-9]+\*? *//' <(history) | tail -r | peco --prompt="History>"
+		}
+		# bind '"\C-r": "\C-e\C-u`__peco_history__`\e\C-e\e^"'
+
+		finco() {
+			local ext=${1:-''}
+			local dir=${2:-.}
+			find ${dir} -name "*${ext}" | peco --prompt="${ext:-File}>"
+		}
+
+		__peco_github__() {
+			find -L ${HOME}/github.com -type d -maxdepth 2 | peco --prompt="Project>" --query=$1
+		}
+
+		pd() {
+			local to=$(__peco_github__ $1)
+			cd ${to:-.}
+		}
+
+		__peco_npmrun__() {
+			local cur prev cword
+			_get_comp_words_by_ref -n : cur prev cword
+			if [ "$prev" = "run" ]; then
+				COMPREPLY=$(jq -r '.scripts | keys[]' package.json | peco --query=$cur)
+			fi
+		}
+		# complete -F __peco_npmrun__ npm
+
+		__peco_go__() {
+			find -L ${HOME}/go/src -type d -maxdepth 3 | peco --prompt "GO>"
+		}
+		gd() {
+			cd $(__peco_go__)
+		}
+	}
+
+
+
+	mkpasswd() {
+		LC_CTYPE=C </dev/urandom tr -dc '_A-Z-a-z-0-9!@#$%^&*/=+.,-' | head -c ${1:-16}; echo ""
+	}
+
+	github() {
+		local where=$1
+		local number=$2
+		local repo=$(pwd | grep -E --only-match 'github.com/[^/]*/[^/]*')
+		[ -z "$repo" ] && echo "pwd does not match with github url" >&2 && return
+		case "${where}" in
+			"issue"|"issues")
+				if [ -z "${number}" ]; then
+					echo "opening https://${repo}/issues" && open -a safari "https://${repo}/issues"
+				else 
+					echo "opening https://${repo}/issues/${number}" && open -a safari "https://${repo}/issues/${number}"
+				fi
+				;;
+			"pull"|"pulls")
+				if [ -z "${number}" ]; then
+					echo "opening https://${repo}/pulls" && open -a safari "https://${repo}/pulls"
+				else 
+					echo "opening https://${repo}/pull/${number}" && open -a safari "https://${repo}/pull/${number}"
+				fi
+				;;
+			*)
+				echo "opening https://${repo}" && open -a safari "https://${repo}"
+				;;
+		esac
+	}
+
+	clone () {
+		local HOST=${3:-github.com}
+		local ACCOUNT=${2:-takayukioda}
+		local REPOSITORY=${1}
+
+		local PROJECT_ROOT=${HOME}/${HOST}
+
+		if [ ! -d ${ACCOUNT} ]; then
+			echo "Creating account directory ${ACCOUNT}"
+			mkdir -p ${PROJECT_ROOT}/${ACCOUNT}
+		fi
+		cd ${PROJECT_ROOT}/${ACCOUNT}
+
+		if [ -d ${REPOSITORY} ]; then
+			echo "Repository already cloned"
+			cd ${PROJECT_ROOT}/${ACCOUNT}/${REPOSITORY}
+			return 2
+		fi
+
+
+		git clone ${HOST}:${ACCOUNT}/${REPOSITORY}.git && \
+			echo "${ACCOUNT}/${REPOSITORY} has been cloned 😉"
+		[ $? -ne 0 ] && \
+			echo "Failed to clone ${ACCOUNT}/${REPOSITORY} 😞" && \
+			return 1
+
+		cd ${PROJECT_ROOT}/${ACCOUNT}/${REPOSITORY}
+	}
+
+}
+
+: "load direnv" && {
+	if which direnv &>/dev/null; then
+		eval "$(direnv hook bash)"
+	fi
+}
+

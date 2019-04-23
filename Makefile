@@ -1,42 +1,45 @@
 EXCLUSIONS := .DS_Store .git .gitmodules .gitignore
-CANDIDATES := $(wildcard .??*) bash bin
+CANDIDATES := $(wildcard _*) darwin
 DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
+UNAME      := $(shell uname -s | tr A-Z a-z)
 
 all: install
 
 help:
 	@echo "make list          #=> Show dot files in this repo"
 	@echo "make deploy        #=> Create symlink to home directory"
-	@echo "make init          #=> Setup environment"
-	@echo "make test          #=> Test dotfiles and init scripts"
 	@echo "make update        #=> Fetch changes for this repo"
 	@echo "make install       #=> Run make update, deploy, init"
-	@echo "make clean         #=> Remove the dot files and this repo"
 
 list:
 	@$(foreach val, $(DOTFILES), ls -dF $(val);)
 
-deploy:
-	@echo "==> Start to deploy dotfiles to home directory."
-	@echo ""
-	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
+# Getting lowercase of system name
+deploy-bash:
+	@ln -sfnv $(abspath $(UNAME)/_bash_profile) $(HOME)/.bash_profile
+	@ln -sfnv $(abspath $(UNAME)/_bash_alias) $(HOME)/.bash_alias
+	@ln -sfnv $(abspath $(UNAME)/_bashrc) $(HOME)/.bashrc
 
-init:
-	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
+deploy-git:
+	@ln -sfnv $(abspath _gitconfig) $(HOME)/.gitconfig
+	@ln -sfnv $(abspath _globalignore) $(HOME)/.globalignore
 
-test:
-	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/test/test.sh
+deploy-vim:
+	@ln -sfnv $(abspath _vim) $(HOME)/.vim
+
+deploy-emacs:
+	@ln -sfnv $(abspath _emacs.d) $(HOME)/.emacs.d
+
+deploy-tmux:
+	@ln -sfnv $(abspath _tmux.conf) $(HOME)/.tmux.conf
+
+deploy-misc:
+	@mkdir -p $(HOME)/.local/bin
+
+deploy: deploy-bash deploy-git deploy-vim deploy-tmux
 
 update:
 	git pull --rebase origin master
-	git submodule init
-	git submodule update
-	git submodule foreach git pull origin master
 
-install: update deploy init
-
-clean:
-	@echo "Remove dot files in your directory..."
-	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
-	-rm -rf $(DOTPATH)
+install: update deploy
