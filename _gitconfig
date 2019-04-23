@@ -1,6 +1,7 @@
 [user]
 	name = takayukioda
 	email = takayuki@odashi.me
+	signingkey = 14D0EB6E54DDD196
 [core]
 	editor = vim
 	pager = less -r -FX
@@ -11,21 +12,28 @@
 [color]
 	ui = auto
 [alias]
-	life       = !echo "No Git, No Life"
 	aliass     = !git config --get-regexp alias
-	me         = !git config --get-regexp user
-	l          = log --decorate --oneline
-	ls         = log --decorate --oneline --stat
-	lg         = log --decorate --oneline --graph
-	nerge      = merge --no-ff
-	purr       = pull --rebase
-	stat       = status --short --branch
+	cancel     = reset --mixed HEAD^
+	fdiff      = diff --ignore-all-space --no-index
+	files      = !cd ${GIT_PREFIX:-.} && git ls-tree -z --name-only HEAD | xargs -0 -n1 -I@ -- git log -1 --pretty=format:'%C(green)%ai%Creset %C(yellow)%h%Creset @ %C(blue)(%ar)%Creset %C(red)<%an>%Creset' -- @
+	fwdiff     = diff --ignore-all-space --word-diff --no-index
 	ibase      = !sh -c 'git rebase -i $(git merge-base ${1:-master} HEAD)' -
-	unstage    = reset HEAD --
-	cancel     = reset --soft HEAD^
-	skip       = update-index --skip-worktree
+	l          = log --oneline
+	ld         = log --decorate --oneline
+	lg         = log --decorate --oneline --graph
+	life       = !echo "No Git, No Life"
+	lp         = log --abbrev-commit --color --pretty=format:'%C(yellow)%h%Creset -%C(yellow reverse)%d%Creset %s %C(blue)(%cr)%C(red)<%an>%Creset'
+	ls         = log --decorate --oneline --stat
+	me         = !git config --get-regexp user
+	nerge      = merge --no-ff
 	noskip     = update-index --no-skip-worktree
 	plune      = !git branch --merged | grep -vE '(master|develop|release|gh-pages|\\*)' | xargs git branch -d
+	purr       = pull --rebase
+	pwd        = rev-parse --show-prefix
+	skip       = update-index --skip-worktree
+	stat       = !git stash list && git status --short --branch
+	unstage    = reset HEAD --
+	wdiff      = diff --ignore-all-space --word-diff
 [help]
 	autocorrect = 0
 [push]
@@ -41,5 +49,7 @@
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[commit]
+	gpgsign = true

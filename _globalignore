@@ -1,0 +1,14 @@
+*sw[a-z]
+.env
+.envrc
+.DS_Store
+/,
+
+
+# Editor specific
+
+### VSCode
+.vscode
+
+### IntelliJ
+*.iml

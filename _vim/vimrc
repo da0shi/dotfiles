@@ -13,7 +13,6 @@ endif
 " }}}
 
 " Environment {{{
-command! VimrcReload source $MYVIMRC
 function! VimrcEnvironment ()
 	let env = {}
 	let env.is_win = has('win32')  || has ('win64')
@@ -36,6 +35,14 @@ endfunction
 
 let s:env = VimrcEnvironment()
 let s:supports = VimrcSupports()
+" }}}
+
+" Custom command {{{
+command! VimrcReload source $MYVIMRC
+command! Tig terminal ++close tig
+command! TigBlame terminal ++close tig blame -- %
+command! TigLog terminal ++close tig log -- %
+command! Vterminal vert terminal ++close
 " }}}
 
 " Mapping {{{
@@ -87,15 +94,15 @@ set laststatus=2
 set showcmd
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 
-set nrformats-=octal
-set formatoptions& formatoptions+=mMj
-set formatoptions-=qro
+" set nrformats-=octal
+" set formatoptions& formatoptions+=mMj
+" set formatoptions-=qro
 set whichwrap=b,s,<,>
 set backspace=indent,eol
 
 " Backup
-set directory=~/.vim/swp
-set backupdir=~/.vim/swp
+set directory=~/.local/share/vim/swp
+set backupdir=~/.local/share/vim/backup
 set nobackup
 
 " Indent
@@ -104,11 +111,12 @@ set autoindent
 set cindent
 set smartindent
 set smarttab
-set list
-set listchars=tab:^\ ,eol:~,trail:_,nbsp:%
+set nolist
+" set listchars=tab:^\ ,eol:~,trail:_,nbsp:%
 set tabstop=4
 set shiftwidth=4
 set softtabstop=0
+set pastetoggle=<F7>
 
 " Search
 set hlsearch
@@ -117,6 +125,28 @@ set smartcase
 set wrapscan
 set noincsearch
 
+" Neovim defaults
+set autoread
+set complete=.,w,b,u,t
+set belloff=all
+set formatoptions=tcqj
+set history=10000
+set incsearch
+set langnoremap
+set listchars="tab:> ,eol:~,trail-,nbsp:+"
+set nocompatible
+set nrformats=bin,hex
+set ruler
+set sessionoptions="nk,buffers,curdir,folds,help,tabpages,winsize,terminal"
+set tabpagemax=50
+set tags=./tags;,tags
+set ttyfast
+set undodir=~/.local/share/vim/undo
+set viminfo='100,<50,s10,h,!
+
+
+
+colorscheme peachpuff
 "}}}
 "
 "File Type and Coding Style {{{
@@ -132,28 +162,39 @@ augroup vimrc_filetype
 
 	" File Type from Extension
 	autocmd BufNewFile,BufRead *.ctp setlocal filetype=php
-	autocmd BufNewFile,BufRead *.twig setlocal filetype=htmljinja
-	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
-	autocmd BufNewFile,BufRead .bash* setlocal filetype=sh
-	autocmd BufNewFile,BufRead *.tex setlocal filetype=tex
-	autocmd BufNewFile,BufRead *.sbt setlocal filetype=scala
 	autocmd BufNewFile,BufRead *.gradle setlocal filetype=groovy
+	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+	autocmd BufNewFile,BufRead *.sbt setlocal filetype=scala
+	autocmd BufNewFile,BufRead *.tex setlocal filetype=tex
+	autocmd BufNewFile,BufRead *.twig setlocal filetype=htmljinja
+	autocmd BufNewFile,BufRead .bash* setlocal filetype=sh
+
+	" https://github.com/posva/vim-vue#how-can-i-use-existing-configurationplugins-in-vue-files
+	" autocmd BufNewFile,BufRead *.vue setlocal filetype=vue.html.javascript.css
 
 	" Coding Style from File Type
-	autocmd FileType vim setlocal foldmethod=marker
-	autocmd FileType markdown setlocal tabstop=2 shiftwidth=2 expandtab
-	autocmd FileType html setlocal tabstop=2 shiftwidth=2 expandtab indentexpr&
-	autocmd FileType css setlocal tabstop=2 shiftwidth=2 expandtab
-	autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType * setlocal formatoptions-=ro
 	autocmd FileType coffee setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType css setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType gitcommit setlocal spell spelllang=en_us
+	autocmd FileType html setlocal tabstop=2 shiftwidth=2 expandtab indentexpr&
+	autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType jinja setlocal tabstop=4 shiftwidth=4 expandtab
 	autocmd FileType json setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType markdown setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType php setlocal tabstop=4 shiftwidth=4
 	autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
 	autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 expandtab
-	autocmd FileType php setlocal tabstop=4 shiftwidth=4
-	autocmd FileType jinja setlocal tabstop=4 shiftwidth=4 expandtab
-	autocmd FileType gitcommit setlocal spell spelllang=en_us
+	autocmd FileType scala setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType scss setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType typescript setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType typescript.tsx setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType vim setlocal foldmethod=marker
 	autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 expandtab
-	autocmd FileType * setlocal formatoptions-=ro
+
+	" help config for vue to mix muliple syntaxes
+	" https://github.com/posva/vim-vue
+	autocmd FileType vue syntax sync fromstart
 augroup END
 " }}}
 
@@ -172,4 +213,62 @@ if exists('g:acp_enableAtStartup')
 		endif
 	endfunction
 endif
+" }}}
+
+" vim-plug {{{
+call plug#begin('~/.vim/plugged')
+
+" Vim usability
+Plug 'ctrlpvim/ctrlp.vim'
+" keep cache on exit
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_lazy_update = 1
+let g:ctrlp_custom_ignore = {
+	\ 'dir': 'node_modules$\|bower_components$\|dist$\|target$',
+	\ 'file': '\.class$',
+	\ }
+
+" JavaScript
+Plug 'pangloss/vim-javascript'
+" " jsx
+Plug 'maxmellon/vim-jsx-pretty'
+let g:vim_jsx_pretty_colorful_config = 1
+" Plug 'othree/yajs.vim'
+" " scss
+Plug 'cakebaker/scss-syntax.vim'
+" " TypeScript
+Plug 'leafgarland/typescript-vim'
+" " tsx
+Plug 'ianks/vim-tsx'
+" " vue
+Plug 'posva/vim-vue'
+" Elm
+Plug 'elmcast/elm-vim'
+
+
+" Scala
+Plug 'derekwyatt/vim-scala'
+
+" Go
+Plug 'fatih/vim-go'
+
+" Rust
+Plug 'rust-lang/rust.vim'
+
+"Haskell
+Plug 'dag/vim2hs'
+let g:haskell_conceal = 0
+
+"Elixir
+Plug 'elixir-editors/vim-elixir'
+
+" Config
+Plug 'cespare/vim-toml'
+
+" Git
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+
+call plug#end()
 " }}}
