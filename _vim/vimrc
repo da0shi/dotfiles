@@ -230,6 +230,13 @@ let g:ctrlp_custom_ignore = {
 	\ 'file': '\.class$',
 	\ }
 
+" HTML & CSS
+Plug 'othree/html5.vim'
+let b:html_indent_inctags = "html,body,head,tbody"
+
+Plug 'hail2u/vim-css3-syntax'
+Plug 'cakebaker/scss-syntax.vim'
+
 " JavaScript
 Plug 'pangloss/vim-javascript'
 " " jsx
@@ -246,7 +253,6 @@ Plug 'ianks/vim-tsx'
 Plug 'posva/vim-vue'
 " Elm
 Plug 'elmcast/elm-vim'
-
 
 " Scala
 Plug 'derekwyatt/vim-scala'
