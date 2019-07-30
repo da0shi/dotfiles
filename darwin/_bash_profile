@@ -5,6 +5,7 @@
 
 : "local bin" && {
 	[ -d /usr/local/bin ] && PATH=/usr/local/bin:${PATH}
+	[ -d /usr/local/sbin ] && PATH=/usr/local/sbin:${PATH}
 	[ -d ${HOME}/.local/bin ]   && PATH=${HOME}/.local/bin:${PATH}
 	[ -d ${HOME}/esp/xtensa-esp32-elf/bin ] && PATH=${PATH}:${HOME}/esp/xtensa-esp32-elf/bin
 }
