@@ -19,6 +19,7 @@ _vim/.VimballRecord
 _vim/**/*.vim
 _vim/syntax/html
 _vim/syntax/javascript
+_vim/plugged/
 
 # Emacs
 *.elc
