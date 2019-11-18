@@ -33,7 +33,7 @@
 	purr       = pull --rebase
 	pwd        = rev-parse --show-prefix
 	skip       = update-index --skip-worktree
-	stat       = !git stash list && git status --short --branch
+	stat       = !cd -- ${GIT_PREFIX:-.} && git stash list && git status --short --branch
 	unstage    = reset HEAD --
 	wdiff      = diff --ignore-all-space --word-diff
 [help]
