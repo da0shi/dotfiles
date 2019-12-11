@@ -143,11 +143,16 @@ set ttyfast
 set undodir=~/.local/share/vim/undo
 set viminfo='100,<50,s10,h,!
 
-
-
 colorscheme peachpuff
 "}}}
-"
+
+" Netrw customize {{{
+let g:netrw_linestyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 75
+" }}}
+
 "File Type and Coding Style {{{
 let g:format_allow_over_tw = 1
 if has('syntax')
