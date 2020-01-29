@@ -1,0 +1,82 @@
+#!/usr/bin/env zsh
+
+function mkpasswd() {
+	LC_CTYPE=C </dev/urandom tr -dc '_A-Z-a-z-0-9!@#$%^&*/=+.,-' | head -c ${1:-16}; echo ""
+}
+
+function __fzf_github__() {
+	find -L ${HOME}/github.com -type d -maxdepth 2 | fzf --prompt="Project> " --query="$1" --select-1 --exit-0
+}
+
+function __fzf_history__() {
+	BUFFER=$(history -n 1 | fzf --prompt="History> " +m --query "$LBUFFER" --tac --no-sort --select-1 --exit-0)
+	CURSOR=$#BUFFER
+}
+zle -N __fzf_history__
+bindkey '^R' __fzf_history__
+
+function fd() {
+	local to=$(__fzf_github__ $1)
+	cd ${to:-.}
+}
+
+function clone () {
+	local REPOSITORY=${1}
+	local ACCOUNT=${2:-takayukioda}
+	local HOST=${3:-github.com}
+
+	if [ -n "$(echo "${REPOSITORY}" | grep '/' 2>/dev/null)" ]; then
+		HOST=${2:-${HOST}}
+		ACCOUNT=${REPOSITORY%/*}
+		REPOSITORY=${REPOSITORY#*/}
+	fi
+
+	if [ -z "${REPOSITORY}" -o -z "${ACCOUNT}" ]; then
+		echo "Missing required information"
+		echo HOST=${HOST}
+		echo ACCOUNT=${REPOSITORY}
+		echo REPOSITORY=${REPOSITORY}
+		return 3
+	fi
+
+	local PROJECT_ROOT=${HOME}/${HOST}
+
+	if [ ! -d ${ACCOUNT} ]; then
+		echo "Creating account directory ${ACCOUNT}"
+		mkdir -p ${PROJECT_ROOT}/${ACCOUNT}
+	fi
+	cd ${PROJECT_ROOT}/${ACCOUNT}
+
+	if [ -d ${REPOSITORY} ]; then
+		echo "Repository already cloned 👀"
+		cd ${PROJECT_ROOT}/${ACCOUNT}/${REPOSITORY}
+		return 2
+	fi
+
+
+	git clone ${HOST}:${ACCOUNT}/${REPOSITORY}.git && \
+		echo "${ACCOUNT}/${REPOSITORY} has been cloned 😉"
+
+	[ $? -ne 0 ] && \
+		echo "Failed to clone ${ACCOUNT}/${REPOSITORY} 😞" && \
+		return 1
+
+	cd ${PROJECT_ROOT}/${ACCOUNT}/${REPOSITORY}
+}
+
+function tmux-prepare() {
+	local session="work"
+	local backend_workdir="${HOME}/github.com/givery-technology/athletics-backend"
+	local user_workdir="${HOME}/github.com/givery-technology/athletics-frontend"
+	local admin_workdir="${HOME}/github.com/givery-technology/athletics-admin-frontend"
+
+	tmux ls | grep work >/dev/null || {
+		tmux new-session -s $session -c $HOME -d
+		tmux new-window -n "backend" -c $backend_workdir
+		tmux new-window -n "user" -c $user_workdir
+		tmux new-window -n "admin" -c $admin_workdir
+	}
+	tmux -2 attach-session -d -t "$session:backend"
+}
+
+

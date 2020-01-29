@@ -1,0 +1,31 @@
+# Zsh
+
+# Default options
+alias ls="ls -GF"
+alias rm="rm -i"
+alias mv="mv -i"
+alias cp="cp -i"
+alias less='less -gMj2';
+
+# Typo
+alias l='ls'
+alias s='ls'
+alias sl='ls'
+
+# Alias
+alias la="ls -a"
+alias ll="ls -lh"
+alias lla="ls -alh"
+alias preview="open -a Preview"
+alias chrome="open -a 'Google Chrome'"
+alias firefox="open -a 'Firefox'"
+
+# Directory shortcut
+# [ -d ${HOME}/Downloads ] && alias dow='cd ${HOME}/Downloads/'
+# [ -d ${HOME}/Documents ] && alias doc='cd ${HOME}/Documents/'
+# [ -d ${HOME}/Desktop ] && alias desk='cd ${HOME}/Desktop/'
+# [ -d ${HOME}/tmp ] && alias tmp='cd ${HOME}/tmp'
+
+docker-noname () {
+	docker image ls --filter "dangling=true" -q
+}

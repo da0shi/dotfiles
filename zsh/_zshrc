@@ -1,0 +1,37 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=5000
+SAVEHIST=10000
+setopt beep nomatch
+setopt appendhistory incappendhistory sharehistory
+unsetopt autocd extendedglob notify
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/Users/takayuki.oda/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+# Exports
+export EDITOR=vim
+export PATH=${HOME}/.local/bin:${PATH}
+
+# Load git-prompt script 
+promptsh="/usr/local/etc/bash_completion.d/git-prompt.sh"
+[ -f ${promptsh} ] && . $promptsh
+setopt prompt_subst
+
+# Prompt
+PROMPT='%F{cyan}[%T]%f %F{yellow}%~%f%F{magenta}$(__git_ps1)%f
+%F{green}%n@%m%f %# '
+
+# Load alias
+source $HOME/.zsh_alias
+
+# Load functions
+source $HOME/.zshfunc
+
+# Setup hook for direnv
+eval "$(direnv hook zsh)"
