@@ -23,3 +23,9 @@ frontend
 redis
 fullwidth
 halfwidth
+bcrypt
+dropdown
+namespace
+enum
+hoverable
+CircleCI

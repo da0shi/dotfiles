@@ -282,6 +282,7 @@ Plug 'elixir-editors/vim-elixir'
 
 " Config
 Plug 'cespare/vim-toml'
+Plug 'jparise/vim-graphql'
 
 " Git
 Plug 'airblade/vim-gitgutter'

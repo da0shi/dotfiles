@@ -17,14 +17,14 @@
 	cancel     = reset --mixed HEAD^
 	fdiff      = diff --ignore-all-space --no-index
 	files      = !cd ${GIT_PREFIX:-.} && git ls-tree -z --name-only HEAD | xargs -0 -n1 -I@ -- git log -1 --pretty=format:'%C(green)%ai%Creset %C(yellow)%h%Creset @ %C(blue)(%ar)%Creset %C(red)<%an>%Creset' -- @
+	forcepush  = push --force-with-lease
 	fwdiff     = diff --ignore-all-space --word-diff --no-index
-	forcepush  = push --force
 	ibase      = !sh -c 'git rebase -i --autosquash $(git merge-base ${1:-master} HEAD)' -
 	l          = log --oneline
 	ld         = log --decorate --oneline
 	lg         = log --decorate --oneline --graph
-	lm         = log --oneline origin/master..
 	life       = !echo "No Git, No Life"
+	lm         = log --oneline origin/master..
 	lp         = log --abbrev-commit --color --pretty=format:'%C(yellow)%h%Creset -%C(yellow reverse)%d%Creset %s %C(blue)(%cr)%C(red)<%an>%Creset'
 	ls         = log --decorate --oneline --stat
 	me         = !git config --get-regexp user
@@ -35,6 +35,7 @@
 	pwd        = rev-parse --show-prefix
 	skip       = update-index --skip-worktree
 	stat       = !cd -- ${GIT_PREFIX:-.} && git stash list && git status --short --branch
+	up         = !git branch -u origin/$(git branch --show-current)
 	unstage    = reset HEAD --
 	wdiff      = diff --ignore-all-space --word-diff
 [help]
