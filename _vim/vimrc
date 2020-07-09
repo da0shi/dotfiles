@@ -181,6 +181,7 @@ augroup vimrc_filetype
 	autocmd FileType coffee setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType css setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType gitcommit setlocal spell spelllang=en_us
+	autocmd FileType haskell setlocal tabstop=4 shiftwidth=4 expandtab
 	autocmd FileType html setlocal tabstop=2 shiftwidth=2 expandtab indentexpr&
 	autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType jinja setlocal tabstop=4 shiftwidth=4 expandtab
@@ -264,18 +265,20 @@ Plug 'ryym/vim-riot'
 " Elm
 Plug 'elmcast/elm-vim'
 
+" Svelte
+Plug 'leafOfTree/vim-svelte-plugin'
+
 " Scala
 Plug 'derekwyatt/vim-scala'
 
 " Go
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Rust
 Plug 'rust-lang/rust.vim'
 
 "Haskell
-Plug 'dag/vim2hs'
-let g:haskell_conceal = 0
+Plug 'neovimhaskell/haskell-vim'
 
 "Elixir
 Plug 'elixir-editors/vim-elixir'
