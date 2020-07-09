@@ -57,3 +57,5 @@
 	trustExitCode = true
 [commit]
 	gpgsign = true
+[pull]
+	ff = only
