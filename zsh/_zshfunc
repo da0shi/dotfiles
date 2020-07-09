@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 function mkpasswd() {
-	LC_CTYPE=C </dev/urandom tr -dc '_A-Z-a-z-0-9!@#$%^&*/=+.,-' | head -c ${1:-16}; echo ""
+	LC_ALL=C </dev/urandom tr -dc '_A-Z-a-z-0-9!@#$%^&*/=+.,-' | head -c ${1:-16}; echo ""
 }
 
 function __fzf_github__() {
@@ -78,5 +78,3 @@ function tmux-prepare() {
 	}
 	tmux -2 attach-session -d -t "$session:backend"
 }
-
-

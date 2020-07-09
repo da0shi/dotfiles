@@ -48,3 +48,5 @@
 }
 
 # vim :set filetype=sh syntax=sh:
+
+export PATH="$HOME/.cargo/bin:$PATH"

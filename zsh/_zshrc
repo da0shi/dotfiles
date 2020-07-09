@@ -1,7 +1,7 @@
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=5000
-SAVEHIST=10000
+HISTSIZE=10000
+SAVEHIST=20000
 setopt beep nomatch
 setopt appendhistory incappendhistory sharehistory
 unsetopt autocd extendedglob notify
@@ -16,7 +16,14 @@ compinit
 
 # Exports
 export EDITOR=vim
-export PATH=${HOME}/.local/bin:${PATH}
+
+PATH=/usr/local/sbin:${PATH}
+PATH=${HOME}/.cargo/bin:${PATH}
+PATH=${HOME}/.local/bin:${PATH}
+export PATH
+
+export LC_ALL=ja_JP.UTF-8
+export LC_CTYPE=ja_JP.UTF-8
 
 # Load git-prompt script 
 promptsh="/usr/local/etc/bash_completion.d/git-prompt.sh"
