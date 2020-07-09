@@ -122,7 +122,7 @@ set hlsearch
 set noignorecase
 set smartcase
 set wrapscan
-set noincsearch
+" set noincsearch
 
 " Neovim defaults
 set autoread
