@@ -9,6 +9,7 @@
 	quotepath = false
 	filemode = false
 	excludesfile = ~/.globalignore
+	diff-highlight = auto
 [color]
 	ui = auto
 [alias]
@@ -59,3 +60,20 @@
 	gpgsign = true
 [pull]
 	ff = only
+[pager]
+	show = diff-highlight | bat --style=plain
+	diff = diff-highlight | bat --style=plain
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow
+	old = red
+	new = green
+	whitespace = red reverse
+[color "diff-highlight"]
+	oldNormal = red
+	oldHighlight = red 52
+	newNormal = green
+	newHighlight = green 22
+[interactive]
+	diffFilter = diff-highlight
