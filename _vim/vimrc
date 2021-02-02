@@ -150,7 +150,7 @@ colorscheme peachpuff
 let g:netrw_linestyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
-let g:netrw_winsize = 75
+let g:netrw_winsize = 80
 " }}}
 
 "File Type and Coding Style {{{
@@ -187,7 +187,7 @@ augroup vimrc_filetype
 	autocmd FileType jinja setlocal tabstop=4 shiftwidth=4 expandtab
 	autocmd FileType json setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType markdown setlocal tabstop=2 shiftwidth=2 expandtab
-	autocmd FileType php setlocal tabstop=4 shiftwidth=4
+	autocmd FileType php setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
 	autocmd FileType pug setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 expandtab
@@ -238,6 +238,15 @@ let g:ctrlp_custom_ignore = {
 	\ 'file': '\.class$',
 	\ }
 
+" Vim LSP supprt
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'natebosch/vim-lsc'
+let g:lsp_async_completion = 1
+
 " HTML & CSS
 Plug 'othree/html5.vim'
 let b:html_indent_inctags = "html,body,head,tbody"
@@ -270,9 +279,6 @@ Plug 'leafOfTree/vim-svelte-plugin'
 
 " Scala
 Plug 'derekwyatt/vim-scala'
-
-" Go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Rust
 Plug 'rust-lang/rust.vim'
