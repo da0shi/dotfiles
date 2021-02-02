@@ -1,14 +1,22 @@
-*sw[a-z]
 .env
-.envrc
 .DS_Store
 /,
 
+# Tools
 
-# Editor specific
+### Eslint
+.eslintcache
 
-### VSCode
-.vscode
+### direnv
+.envrc
+
+### vim
+*sw[a-z]
+
+# Editors
 
 ### IntelliJ
 *.iml
+
+### VSCode
+.vscode/

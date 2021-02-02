@@ -77,3 +77,5 @@
 	newHighlight = green 22
 [interactive]
 	diffFilter = diff-highlight
+[init]
+	defaultBranch = main
