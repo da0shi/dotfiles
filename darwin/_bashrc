@@ -215,3 +215,4 @@ shopt -s checkwinsize
 	fi
 }
 
+source "$HOME/.cargo/env"
