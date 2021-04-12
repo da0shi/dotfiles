@@ -61,8 +61,8 @@
 [pull]
 	ff = only
 [pager]
-	show = diff-highlight | bat --style=plain
-	diff = diff-highlight | bat --style=plain
+	# show = diff-highlight | bat --style=plain
+	# diff = diff-highlight | bat --style=plain
 [color "diff"]
 	meta = yellow
 	frag = magenta bold
@@ -76,6 +76,6 @@
 	newNormal = green
 	newHighlight = green 22
 [interactive]
-	diffFilter = diff-highlight
+	# diffFilter = diff-highlight
 [init]
 	defaultBranch = main

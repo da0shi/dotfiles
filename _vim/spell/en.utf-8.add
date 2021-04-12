@@ -29,3 +29,6 @@ namespace
 enum
 hoverable
 CircleCI
+terraform's
+aws
+hashicorp

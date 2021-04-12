@@ -198,7 +198,7 @@ augroup vimrc_filetype
 	autocmd FileType typescript.tsx setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType vim setlocal foldmethod=marker
 	autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 expandtab
-	autocmd FileType sql setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType sql setlocal tabstop=4 shiftwidth=4 noexpandtab
 
 	" help config for vue to mix muliple syntaxes
 	" https://github.com/posva/vim-vue
@@ -276,6 +276,7 @@ Plug 'elmcast/elm-vim'
 
 " Svelte
 Plug 'leafOfTree/vim-svelte-plugin'
+let g:vim_svelte_plugin_use_typescript = 1
 
 " Scala
 Plug 'derekwyatt/vim-scala'
