@@ -15,7 +15,7 @@ function __fzf_history__() {
 zle -N __fzf_history__
 bindkey '^R' __fzf_history__
 
-function fd() {
+function gd() {
 	local to=$(__fzf_github__ $1)
 	cd ${to:-.}
 }
@@ -64,17 +64,3 @@ function clone () {
 	cd ${PROJECT_ROOT}/${ACCOUNT}/${REPOSITORY}
 }
 
-function tmux-prepare() {
-	local session="work"
-	local backend_workdir="${HOME}/github.com/givery-technology/athletics-backend"
-	local user_workdir="${HOME}/github.com/givery-technology/athletics-frontend"
-	local admin_workdir="${HOME}/github.com/givery-technology/athletics-admin-frontend"
-
-	tmux ls | grep work >/dev/null || {
-		tmux new-session -s $session -c $HOME -d
-		tmux new-window -n "backend" -c $backend_workdir
-		tmux new-window -n "user" -c $user_workdir
-		tmux new-window -n "admin" -c $admin_workdir
-	}
-	tmux -2 attach-session -d -t "$session:backend"
-}
