@@ -21,6 +21,11 @@ deploy-bash:
 	@ln -sfnv $(abspath $(UNAME)/_bash_alias) $(HOME)/.bash_alias
 	@ln -sfnv $(abspath $(UNAME)/_bashrc) $(HOME)/.bashrc
 
+deploy-zsh:
+	@ln -sfnv $(abspath zsh/_zshfunc) $(HOME)/.zshfunc
+	@ln -sfnv $(abspath zsh/_zsh_alias) $(HOME)/.zsh_alias
+	@ln -sfnv $(abspath zsh/_zshrc) $(HOME)/.zshrc
+
 deploy-git:
 	@ln -sfnv $(abspath _gitconfig) $(HOME)/.gitconfig
 	@ln -sfnv $(abspath _globalignore) $(HOME)/.globalignore
@@ -37,7 +42,7 @@ deploy-tmux:
 deploy-misc:
 	@mkdir -p $(HOME)/.local/bin
 
-deploy: deploy-bash deploy-git deploy-vim deploy-tmux
+deploy: deploy-bash deploy-zsh deploy-git deploy-vim deploy-tmux
 
 update:
 	git pull --rebase origin master
