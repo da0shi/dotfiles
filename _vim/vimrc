@@ -281,6 +281,9 @@ let g:vim_svelte_plugin_use_typescript = 1
 " Scala
 Plug 'derekwyatt/vim-scala'
 
+" Kotlin
+Plug 'udalov/kotlin-vim'
+
 " Rust
 Plug 'rust-lang/rust.vim'
 
