@@ -26,7 +26,8 @@
 	lg         = log --decorate --oneline --graph
 	life       = !echo "No Git, No Life"
 	lm         = log --oneline origin/master..
-	lp         = log --abbrev-commit --color --pretty=format:'%C(yellow)%h%Creset -%C(yellow reverse)%d%Creset %s %C(blue)(%cr)%C(red)<%an>%Creset'
+	lp         = log --abbrev-commit --color --pretty=format:'%C(yellow)%h%Creset -%C(auto)%d%Creset %s %C(blue)(%cd)%C(red)<%an>%Creset' --date iso
+	lpr        = log --abbrev-commit --color --pretty=format:'%C(yellow)%h%Creset -%C(auto)%d%Creset %s %C(blue)(%cr)%C(red)<%an>%Creset'
 	ls         = log --decorate --oneline --stat
 	me         = !git config --get-regexp user
 	nerge      = merge --no-ff
@@ -39,6 +40,7 @@
 	up         = !git branch -u origin/$(git branch --show-current)
 	unstage    = reset HEAD --
 	wdiff      = diff --ignore-all-space --word-diff
+	wip        = commit --no-verify -m "WIP"
 [help]
 	autocorrect = 0
 [push]
