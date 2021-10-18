@@ -64,3 +64,5 @@ function clone () {
 	cd ${PROJECT_ROOT}/${ACCOUNT}/${REPOSITORY}
 }
 
+# Work related functions
+[ -f "${HOME}"/.zshwork ] && source "${HOME}/.zshwork"
