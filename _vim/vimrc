@@ -172,6 +172,7 @@ augroup vimrc_filetype
 	autocmd BufNewFile,BufRead *.tex setlocal filetype=tex
 	autocmd BufNewFile,BufRead *.twig setlocal filetype=htmljinja
 	autocmd BufNewFile,BufRead .bash* setlocal filetype=sh
+	autocmd BufNewFile,BufRead tsconfig.* setlocal filetype=jsonc
 
 	" https://github.com/posva/vim-vue#how-can-i-use-existing-configurationplugins-in-vue-files
 	" autocmd BufNewFile,BufRead *.vue setlocal filetype=vue.html.javascript.css
