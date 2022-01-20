@@ -15,24 +15,27 @@
 [alias]
 	aliass     = !git config --get-regexp alias
 	amend      = commit --amend
+	browse     = !gh repo view -w
 	cancel     = reset --mixed HEAD^
 	fdiff      = diff --ignore-all-space --no-index
 	files      = !cd ${GIT_PREFIX:-.} && git ls-tree -z --name-only HEAD | xargs -0 -n1 -I@ -- git log -1 --pretty=format:'%C(green)%ai%Creset %C(yellow)%h%Creset @ %C(blue)(%ar)%Creset %C(red)<%an>%Creset' -- @
 	forcepush  = push --force-with-lease
 	fwdiff     = diff --ignore-all-space --word-diff --no-index
-	ibase      = !sh -c 'git rebase -i --autosquash $(git merge-base ${1:-master} HEAD)' -
+	ibase      = !sh -c 'git rebase -i --autosquash $(git merge-base ${1:-main} HEAD)' -
+	imbase     = !sh -c 'git rebase -i --autosquash $(git merge-base ${1:-main} HEAD)' -
 	l          = log --oneline
 	ld         = log --decorate --oneline
 	lg         = log --decorate --oneline --graph
 	life       = !echo "No Git, No Life"
-	lm         = log --oneline origin/master..
+	lm         = log --oneline origin/main..
+	lma        = log --oneline origin/master..
 	lp         = log --abbrev-commit --color --pretty=format:'%C(yellow)%h%Creset -%C(auto)%d%Creset %s %C(blue)(%cd)%C(red)<%an>%Creset' --date iso
 	lpr        = log --abbrev-commit --color --pretty=format:'%C(yellow)%h%Creset -%C(auto)%d%Creset %s %C(blue)(%cr)%C(red)<%an>%Creset'
 	ls         = log --decorate --oneline --stat
 	me         = !git config --get-regexp user
 	nerge      = merge --no-ff
 	noskip     = update-index --no-skip-worktree
-	plune      = !git branch --merged | grep -vE '(master|develop|release|gh-pages|\\*)' | xargs git branch -d
+	plune      = !git branch --merged | grep -vE '(main|master|develop|release|gh-pages|\\*)' | xargs git branch -d
 	purr       = pull --rebase
 	pwd        = rev-parse --show-prefix
 	skip       = update-index --skip-worktree
