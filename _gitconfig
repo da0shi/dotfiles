@@ -22,7 +22,7 @@
 	forcepush  = push --force-with-lease
 	fwdiff     = diff --ignore-all-space --word-diff --no-index
 	ibase      = !sh -c 'git rebase -i --autosquash $(git merge-base ${1:-main} HEAD)' -
-	imbase     = !sh -c 'git rebase -i --autosquash $(git merge-base ${1:-main} HEAD)' -
+	imbase     = !sh -c 'git rebase -i --autosquash $(git merge-base ${1:-master} HEAD)' -
 	l          = log --oneline
 	ld         = log --decorate --oneline
 	lg         = log --decorate --oneline --graph
