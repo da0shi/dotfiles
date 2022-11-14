@@ -49,4 +49,4 @@
 
 # vim :set filetype=sh syntax=sh:
 
-source "$HOME/.cargo/env"
+. "$HOME/.cargo/env"
