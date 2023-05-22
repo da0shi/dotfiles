@@ -181,6 +181,7 @@ augroup vimrc_filetype
 	autocmd FileType * setlocal formatoptions-=ro
 	autocmd FileType coffee setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType css setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType elm setlocal tabstop=4 shiftwidth=4 expandtab
 	autocmd FileType gitcommit setlocal spell spelllang=en_us
 	autocmd FileType haskell setlocal tabstop=4 shiftwidth=4 expandtab
 	autocmd FileType html setlocal tabstop=2 shiftwidth=2 expandtab indentexpr&
@@ -189,17 +190,17 @@ augroup vimrc_filetype
 	autocmd FileType json setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType markdown setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType php setlocal tabstop=2 shiftwidth=2 expandtab
-	autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
 	autocmd FileType pug setlocal tabstop=2 shiftwidth=2 expandtab
-	autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
 	autocmd FileType riot setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType scala setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType scss setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType sql setlocal tabstop=4 shiftwidth=4 noexpandtab
 	autocmd FileType typescript setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType typescript.tsx setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType vim setlocal foldmethod=marker
 	autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 expandtab
-	autocmd FileType sql setlocal tabstop=4 shiftwidth=4 noexpandtab
 
 	" help config for vue to mix muliple syntaxes
 	" https://github.com/posva/vim-vue
@@ -273,7 +274,7 @@ Plug 'posva/vim-vue'
 Plug 'ryym/vim-riot'
 
 " Elm
-Plug 'elmcast/elm-vim'
+" Plug 'elmcast/elm-vim'
 
 " Svelte
 Plug 'leafOfTree/vim-svelte-plugin'
