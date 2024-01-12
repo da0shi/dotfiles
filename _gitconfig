@@ -15,7 +15,6 @@
 [alias]
 	aliass     = !git config --get-regexp alias
 	amend      = commit --amend
-	browse     = !gh repo view -w
 	cancel     = reset --mixed HEAD^
 	fdiff      = diff --ignore-all-space --no-index
 	files      = !cd ${GIT_PREFIX:-.} && git ls-tree -z --name-only HEAD | xargs -0 -n1 -I@ -- git log -1 --pretty=format:'%C(green)%ai%Creset %C(yellow)%h%Creset @ %C(blue)(%ar)%Creset %C(red)<%an>%Creset' -- @
@@ -44,6 +43,10 @@
 	unstage    = reset HEAD --
 	wdiff      = diff --ignore-all-space --word-diff
 	wip        = commit --no-verify -m "WIP"
+
+	# gh command related
+	hub     = !gh repo view --web
+	pr       = !gh pr view --web
 [help]
 	autocorrect = 0
 [push]
@@ -86,3 +89,5 @@
 	# diffFilter = diff-highlight
 [init]
 	defaultBranch = main
+[blame]
+	coloring = repeatedLines
